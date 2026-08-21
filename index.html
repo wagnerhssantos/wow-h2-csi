@@ -1,0 +1,347 @@
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Ranking WoW H2 - CSI",
+  "schemaVersion": 1,
+  "description": "Ranking de Xmarts, times e lideranças por WoWs submetidas no WoW H2 - CSI no semestre atual, calculado em tempo real a partir da planilha \"Base Faísca H22026\".",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ranking WoW H2 - CSI</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --purple: #820AD1;
+    --purple-dark: #5c0796;
+    --purple-light: #f3e6fc;
+    --bg: #faf8fc;
+    --text: #2b1338;
+    --muted: #7a6b85;
+    --border: #e6d9f0;
+    --gold: #f5b301;
+    --silver: #b8c0c8;
+    --bronze: #cd7f32;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  h1 { font-size: 24px; margin: 0; color: var(--purple-dark); }
+  h1 span.emoji { margin-right: 6px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .badge {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .period-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 18px;
+    flex-wrap: wrap;
+  }
+  .period-bar label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  select#periodSelect {
+    padding: 9px 14px;
+    border: 1.5px solid var(--purple);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--purple-dark);
+    background: white;
+    cursor: pointer;
+    min-width: 240px;
+  }
+  .period-hint { font-size: 12px; color: var(--muted); }
+  .stats-row { display: flex; gap: 12px; margin: 0 0 22px; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 140px; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .stat-card .num { font-size: 26px; font-weight: 700; color: var(--purple); }
+  .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+  .tab-btn {
+    background: none; border: none; font-size: 14px; font-weight: 600; color: var(--muted);
+    padding: 10px 16px; cursor: pointer; border-radius: 8px 8px 0 0; transition: all .15s;
+  }
+  .tab-btn.active { color: var(--purple-dark); background: var(--purple-light); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  input[type="search"] { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; min-width: 220px; background: white; }
+  .podium { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
+  .podium-card { flex: 1; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; position: relative; }
+  .podium-card.p1 { border-color: var(--gold); background: linear-gradient(180deg, #fff8e6, #ffffff); order: 2; }
+  .podium-card.p2 { border-color: var(--silver); order: 1; }
+  .podium-card.p3 { border-color: var(--bronze); order: 3; }
+  .medal { font-size: 26px; }
+  .podium-name { font-weight: 700; font-size: 13px; margin-top: 6px; word-break: break-word; }
+  .podium-count { font-size: 20px; font-weight: 800; color: var(--purple); margin-top: 2px; }
+  .podium-sub { font-size: 11px; color: var(--muted); }
+  table.rank-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  table.rank-table th, table.rank-table td { padding: 9px 12px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+  table.rank-table th { background: var(--purple-light); color: var(--purple-dark); font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+  table.rank-table tr:last-child td { border-bottom: none; }
+  table.rank-table tr:hover td { background: #fbf6fd; }
+  .rank-num { font-weight: 700; color: var(--muted); width: 32px; }
+  .bar-cell { width: 160px; }
+  .bar-bg { background: var(--purple-light); border-radius: 6px; height: 8px; overflow: hidden; }
+  .bar-fill { background: var(--purple); height: 8px; border-radius: 6px; }
+  .count-cell { font-weight: 700; color: var(--purple-dark); text-align: right; width: 60px; }
+  .chart-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-top: 20px; }
+  .chart-box h3 { margin: 0 0 12px; font-size: 14px; color: var(--purple-dark); }
+  canvas { max-height: 320px; }
+  .empty-msg { text-align: center; color: var(--muted); padding: 40px 0; font-size: 13px; }
+  footer.note { text-align: center; color: var(--muted); font-size: 11px; margin-top: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1><span class="emoji">🏆</span>Ranking WoW H2 - CSI</h1>
+      <div class="subtitle" id="semesterLabel"></div>
+    </div>
+    <span class="badge" id="lastUpdated"></span>
+  </header>
+
+  <div class="period-bar">
+    <label for="periodSelect">Período:</label>
+    <select id="periodSelect"></select>
+    <span class="period-hint">escolha um mês para ver o recorte mensal, ou o semestre completo para a visão geral</span>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="statTotalWows">-</div><div class="label">WoWs no período</div></div>
+    <div class="stat-card"><div class="num" id="statTotalXmarts">-</div><div class="label">Xmarts que submeteram</div></div>
+    <div class="stat-card"><div class="num" id="statTotalTimes">-</div><div class="label">Times participando</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="xmarts">Xmarts</button>
+    <button class="tab-btn" data-tab="times">Times</button>
+    <button class="tab-btn" data-tab="lideres">Lideranças</button>
+  </div>
+
+  <div class="panel active" id="panel-xmarts">
+    <div class="toolbar"><input type="search" id="searchXmarts" placeholder="Buscar Xmart..."></div>
+    <div id="podiumXmarts" class="podium"></div>
+    <table class="rank-table">
+      <thead><tr><th>#</th><th>Xmart</th><th>Time</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
+      <tbody id="tbodyXmarts"></tbody>
+    </table>
+    <div class="chart-box"><h3>Top 10 Xmarts</h3><canvas id="chartXmarts"></canvas></div>
+  </div>
+
+  <div class="panel" id="panel-times">
+    <div class="toolbar"><input type="search" id="searchTimes" placeholder="Buscar time..."></div>
+    <div id="podiumTimes" class="podium"></div>
+    <table class="rank-table">
+      <thead><tr><th>#</th><th>Time</th><th>Líder (Xforce)</th><th>Xmarts ativos</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
+      <tbody id="tbodyTimes"></tbody>
+    </table>
+    <div class="chart-box"><h3>Top 10 Times</h3><canvas id="chartTimes"></canvas></div>
+  </div>
+
+  <div class="panel" id="panel-lideres">
+    <div class="toolbar"><input type="search" id="searchLideres" placeholder="Buscar liderança..."></div>
+    <div id="podiumLideres" class="podium"></div>
+    <table class="rank-table">
+      <thead><tr><th>#</th><th>Liderança</th><th>Time</th><th class="bar-cell"></th><th>WoWs do time</th></tr></thead>
+      <tbody id="tbodyLideres"></tbody>
+    </table>
+    <div class="chart-box"><h3>Top 10 Lideranças</h3><canvas id="chartLideres"></canvas></div>
+  </div>
+
+  <footer class="note" id="footerNote">Fonte: planilha "Base Faísca H22026" (aba "(Automatização) WoWs Faísca" + "Times e bandeiras"). Atualizado automaticamente todas as manhãs.</footer>
+</div>
+
+<script>
+
+let charts = {};
+
+function renderPodium(containerId, items, unitLabel, subFn) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  const medals = ["🥇", "🥈", "🥉"];
+  const top3 = items.slice(0, 3);
+  if (top3.length === 0) { el.innerHTML = '<div class="empty-msg">Sem dados neste período.</div>'; return; }
+  top3.forEach((item, i) => {
+    const card = document.createElement("div");
+    card.className = "podium-card p" + (i + 1);
+    card.innerHTML = `
+      <div class="medal">${medals[i]}</div>
+      <div class="podium-name">${item.name}</div>
+      <div class="podium-count">${item.count}</div>
+      <div class="podium-sub">${unitLabel}${subFn ? " · " + subFn(item) : ""}</div>
+    `;
+    el.appendChild(card);
+  });
+}
+
+function renderTable(tbodyId, items, rowRenderer) {
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = "";
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" class="empty-msg">Nenhum resultado neste período.</td></tr>`;
+    return;
+  }
+  items.forEach((item, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = rowRenderer(item, idx);
+    tbody.appendChild(tr);
+  });
+}
+
+function barCellHtml(count, max) {
+  const pct = max > 0 ? Math.max(4, Math.round((count / max) * 100)) : 0;
+  return `<div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>`;
+}
+
+function renderChart(canvasId, labels, data, color) {
+  const ctx = document.getElementById(canvasId).getContext("2d");
+  if (charts[canvasId]) charts[canvasId].destroy();
+  charts[canvasId] = new Chart(ctx, {
+    type: "bar",
+    data: { labels: labels, datasets: [{ data: data, backgroundColor: color, borderRadius: 6 }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: "y",
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+    }
+  });
+}
+
+function renderPeriod(period) {
+  document.getElementById("statTotalWows").textContent = period.total_wows;
+  document.getElementById("statTotalXmarts").textContent = period.total_xmarts;
+  document.getElementById("statTotalTimes").textContent = period.total_teams;
+
+  const xmartList = period.xmarts;
+  const teamList = period.teams;
+  const leaderList = period.leaders;
+
+  const maxXmart = xmartList.length ? xmartList[0].count : 0;
+  const maxTeam = teamList.length ? teamList[0].count : 0;
+  const maxLeader = leaderList.length ? leaderList[0].count : 0;
+
+  const xmartRow = (it, idx) => `
+    <td class="rank-num">${idx + 1}</td>
+    <td>${it.name}</td>
+    <td>${it.team}</td>
+    <td class="bar-cell">${barCellHtml(it.count, maxXmart)}</td>
+    <td class="count-cell">${it.count}</td>
+  `;
+  const teamRow = (it, idx) => `
+    <td class="rank-num">${idx + 1}</td>
+    <td>${it.name}</td>
+    <td>${it.leaderName}</td>
+    <td>${it.xmarts}</td>
+    <td class="bar-cell">${barCellHtml(it.count, maxTeam)}</td>
+    <td class="count-cell">${it.count}</td>
+  `;
+  const leaderRow = (it, idx) => `
+    <td class="rank-num">${idx + 1}</td>
+    <td>${it.name}</td>
+    <td>${it.team}</td>
+    <td class="bar-cell">${barCellHtml(it.count, maxLeader)}</td>
+    <td class="count-cell">${it.count}</td>
+  `;
+
+  renderPodium("podiumXmarts", xmartList, "WoWs", it => it.team !== "-" ? it.team : "");
+  renderTable("tbodyXmarts", xmartList, xmartRow);
+  renderChart("chartXmarts", xmartList.slice(0, 10).map(it => it.name), xmartList.slice(0, 10).map(it => it.count), "#820AD1");
+
+  renderPodium("podiumTimes", teamList, "WoWs", it => `Líder: ${it.leaderName}`);
+  renderTable("tbodyTimes", teamList, teamRow);
+  renderChart("chartTimes", teamList.slice(0, 10).map(it => it.name), teamList.slice(0, 10).map(it => it.count), "#5c0796");
+
+  renderPodium("podiumLideres", leaderList, "WoWs", it => it.team !== "-" ? it.team : "");
+  renderTable("tbodyLideres", leaderList, leaderRow);
+  renderChart("chartLideres", leaderList.slice(0, 10).map(it => it.name), leaderList.slice(0, 10).map(it => it.count), "#b8860b");
+
+  document.getElementById("searchXmarts").value = "";
+  document.getElementById("searchTimes").value = "";
+  document.getElementById("searchLideres").value = "";
+
+  document.getElementById("searchXmarts").oninput = (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = q ? xmartList.filter(it => (it.name + " " + it.team + " " + it.email).toLowerCase().includes(q)) : xmartList;
+    renderTable("tbodyXmarts", filtered, (it) => xmartRow(it, xmartList.indexOf(it)));
+  };
+  document.getElementById("searchTimes").oninput = (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = q ? teamList.filter(it => (it.name + " " + it.leaderName).toLowerCase().includes(q)) : teamList;
+    renderTable("tbodyTimes", filtered, (it) => teamRow(it, teamList.indexOf(it)));
+  };
+  document.getElementById("searchLideres").oninput = (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = q ? leaderList.filter(it => (it.name + " " + it.team + " " + it.email).toLowerCase().includes(q)) : leaderList;
+    renderTable("tbodyLideres", filtered, (it) => leaderRow(it, leaderList.indexOf(it)));
+  };
+}
+
+let RANKING_DATA = null;
+
+async function main() {
+  const res = await fetch("data.json");
+  RANKING_DATA = await res.json();
+  document.getElementById("semesterLabel").textContent = `WoW H2 - CSI · ${RANKING_DATA.semester_label}`;
+  document.getElementById("lastUpdated").textContent = "Atualizado em " + new Date(RANKING_DATA.generated_at).toLocaleString("pt-BR");
+
+  const select = document.getElementById("periodSelect");
+  RANKING_DATA.periods.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.key;
+    opt.textContent = `${p.label} (${p.total_wows} WoWs)`;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => {
+    const period = RANKING_DATA.periods.find(p => p.key === select.value);
+    if (period) renderPeriod(period);
+  });
+
+  renderPeriod(RANKING_DATA.periods[0]);
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+  });
+});
+
+main();
+</script>
+</body>
+</html>
