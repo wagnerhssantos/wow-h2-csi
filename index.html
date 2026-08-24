@@ -337,7 +337,12 @@ const GOALS = { wows: 120, xmarts: 200, teams: 28 };
 const CHANNEL_LABELS = { phone: "Telefone", chat: "Chat", backoffice: "Backoffice", zendesk: "Zendesk", outros: "Outros" };
 const CHANNEL_COLORS = { phone: "#820AD1", chat: "#17a673", backoffice: "#d69e00", zendesk: "#2563eb", outros: "#9a8ba8" };
 
-const SITE_PASSWORD = "********";
+const SITE_PASSWORD_HASH = "5b9e5e090f0cb0374d7894a6055a0e8a59c042649e360f83f819034828b95ee9";
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest("SHA-256", enc);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
 
 const SIDEBAR_DATA = {
   videos: [],
@@ -373,8 +378,9 @@ function initPasswordGate() {
   }
   const input = document.getElementById("passwordInput");
   const error = document.getElementById("passwordError");
-  const submit = () => {
-    if (input.value === SITE_PASSWORD) {
+  const submit = async () => {
+    const hash = await sha256Hex(input.value);
+    if (hash === SITE_PASSWORD_HASH) {
       sessionStorage.setItem("wowCsiAuth", "1");
       gate.classList.add("hidden");
     } else {
