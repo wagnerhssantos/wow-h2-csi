@@ -1,1 +1,728 @@
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Ranking WoW H2 - CSI",
+  "schemaVersion": 1,
+  "description": "Ranking de Xmarts, times e lideranças por WoWs submetidas no WoW H2 - CSI no semestre atual, calculado em tempo real a partir da planilha \"Base Faísca H22026\".",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ranking WoW H2 - CSI</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --purple: #820AD1;
+    --purple-dark: #5c0796;
+    --purple-light: #f3e6fc;
+    --bg: #faf8fc;
+    --text: #2b1338;
+    --muted: #7a6b85;
+    --border: #e6d9f0;
+    --gold: #820AD1;
+    --silver: #a855f7;
+    --bronze: #d8b4fe;
+    --green: #17a673;
+    --green-bg: #e6f7ef;
+    --yellow: #d69e00;
+    --yellow-bg: #fef6e0;
+    --red: #d93636;
+    --red-bg: #fdeaea;
+    --pending: #9a8ba8;
+    --pending-bg: #efeaf5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+  header.top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  h1 { font-size: 24px; margin: 0; color: var(--purple-dark); display: flex; align-items: center; }
+  h1 .mascot-icon { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; margin-right: 8px; border: 2px solid var(--purple-light); flex-shrink: 0; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .badge {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .period-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 18px;
+    flex-wrap: wrap;
+  }
+  .period-bar label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  select#periodSelect {
+    padding: 9px 14px;
+    border: 1.5px solid var(--purple);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--purple-dark);
+    background: white;
+    cursor: pointer;
+    min-width: 240px;
+  }
+  .period-hint { font-size: 12px; color: var(--muted); }
+  .stats-row { display: flex; gap: 12px; margin: 0 0 22px; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 140px; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .stat-card .num { font-size: 26px; font-weight: 700; color: var(--purple); }
+  .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border); margin-bottom: 16px; flex-wrap: wrap; }
+  .tab-btn {
+    background: none; border: none; font-size: 14px; font-weight: 600; color: var(--muted);
+    padding: 10px 16px; cursor: pointer; border-radius: 8px 8px 0 0; transition: all .15s;
+  }
+  .tab-btn.active { color: var(--purple-dark); background: var(--purple-light); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  input[type="search"] { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; min-width: 220px; background: white; }
+  .toggle-group { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .toggle-btn {
+    padding: 8px 14px;
+    border: 1.5px solid var(--purple);
+    border-radius: 999px;
+    background: white;
+    color: var(--purple-dark);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .toggle-btn.active { background: var(--purple); color: white; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--purple-dark); margin: 28px 0 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .section-title:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .podium { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
+  .podium-card { flex: 1; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; position: relative; }
+  .podium-card.p1 { border-color: var(--gold); background: linear-gradient(180deg, #f3e6fc, #ffffff); order: 2; }
+  .podium-card.p2 { border-color: var(--silver); order: 1; }
+  .podium-card.p3 { border-color: var(--bronze); order: 3; }
+  .medal { font-size: 28px; line-height: 1; }
+  .medal.p1 { color: var(--gold); }
+  .medal.p2 { color: var(--silver); }
+  .medal.p3 { color: var(--bronze); }
+  .podium-name { font-weight: 700; font-size: 13px; margin-top: 6px; word-break: break-word; }
+  .podium-count { font-size: 20px; font-weight: 800; color: var(--purple); margin-top: 2px; }
+  .podium-sub { font-size: 11px; color: var(--muted); }
+  table.rank-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  table.rank-table th, table.rank-table td { padding: 9px 12px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+  table.rank-table th { background: var(--purple-light); color: var(--purple-dark); font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+  table.rank-table tr:last-child td { border-bottom: none; }
+  table.rank-table tr:hover td { background: #fbf6fd; }
+  .rank-num { font-weight: 700; color: var(--muted); width: 32px; }
+  .bar-cell { width: 160px; }
+  .bar-bg { background: var(--purple-light); border-radius: 6px; height: 8px; overflow: hidden; }
+  .bar-fill { background: var(--purple); height: 8px; border-radius: 6px; }
+  .count-cell { font-weight: 700; color: var(--purple-dark); text-align: right; width: 60px; }
+  .chart-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-top: 20px; }
+  .chart-box h3 { margin: 0 0 12px; font-size: 14px; color: var(--purple-dark); }
+  canvas { max-height: 320px; }
+  .empty-msg { text-align: center; color: var(--muted); padding: 40px 0; font-size: 13px; }
+  footer.note { text-align: center; color: var(--muted); font-size: 11px; margin-top: 26px; }
+
+  .quality-hero { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
+  .quality-hero .qh-title { font-size: 13px; font-weight: 700; color: var(--purple-dark); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 12px; }
+  .quality-bar { display: flex; width: 100%; height: 26px; border-radius: 999px; overflow: hidden; background: var(--pending-bg); border: 1px solid var(--border); }
+  .quality-seg { height: 100%; transition: width .3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; overflow: hidden; white-space: nowrap; }
+  .quality-seg.green { background: var(--green); }
+  .quality-seg.yellow { background: var(--yellow); }
+  .quality-seg.red { background: var(--red); }
+  .quality-legend { display: flex; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
+  .quality-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text); }
+  .quality-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .quality-dot.green { background: var(--green); }
+  .quality-dot.yellow { background: var(--yellow); }
+  .quality-dot.red { background: var(--red); }
+  .quality-dot.pending { background: var(--pending); }
+  .quality-cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .quality-card { flex: 1; min-width: 150px; background: white; border: 1px solid var(--border); border-left: 4px solid var(--muted); border-radius: 12px; padding: 14px 16px; }
+  .quality-card.green { border-left-color: var(--green); }
+  .quality-card.yellow { border-left-color: var(--yellow); }
+  .quality-card.red { border-left-color: var(--red); }
+  .quality-card.pending { border-left-color: var(--pending); }
+  .quality-card .qc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .quality-card .qc-num { font-size: 24px; font-weight: 800; color: var(--text); margin-top: 4px; }
+  .quality-card .qc-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .quality-insights { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .insight-card { flex: 1; min-width: 220px; border-radius: 12px; padding: 14px 16px; font-size: 13px; line-height: 1.45; }
+  .insight-card .ic-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 6px; }
+  .insight-card.attention { background: var(--red-bg); color: #7a1f1f; }
+  .insight-card.attention .ic-title { color: var(--red); }
+  .insight-card.highlight { background: var(--green-bg); color: #114f39; }
+  .insight-card.highlight .ic-title { color: var(--green); }
+
+  .goal-cards { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .goal-card { flex: 1; min-width: 200px; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+  .goal-card.done { border-color: var(--green); background: var(--green-bg); }
+  .goal-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .goal-num { font-size: 28px; font-weight: 800; color: var(--purple-dark); margin-top: 4px; }
+  .goal-num .goal-target { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .goal-progress-bg { background: var(--purple-light); border-radius: 6px; height: 8px; overflow: hidden; margin-top: 10px; }
+  .goal-progress-fill { background: var(--purple); height: 8px; border-radius: 6px; }
+  .goal-card.done .goal-progress-fill { background: var(--green); }
+  .goal-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .goal-card.done .goal-sub { color: var(--green); font-weight: 600; }
+
+  .callout { margin-top: 14px; background: var(--purple-light); border-radius: 10px; padding: 12px 14px; font-size: 12.5px; color: var(--purple-dark); line-height: 1.5; }
+  .channel-summary { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
+  .critical-note { background: var(--red-bg); color: #7a1f1f; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 14px; }
+
+  .podium.flat .podium-card { order: initial; }
+  .podium-card.p4, .podium-card.p5 { border-color: var(--border); }
+  .medal.p4, .medal.p5 { color: var(--muted); font-size: 18px; }
+
+  .sidebar-btn { background: white; border: 1.5px solid var(--purple); color: var(--purple-dark); font-weight: 600; font-size: 12.5px; padding: 7px 12px; border-radius: 999px; cursor: pointer; }
+  .sidebar-overlay { position: fixed; inset: 0; background: rgba(43,19,56,0.4); display: none; z-index: 40; }
+  .sidebar-overlay.open { display: block; }
+  .sidebar-panel { position: fixed; top: 0; right: -340px; width: 320px; height: 100%; background: white; box-shadow: -4px 0 20px rgba(0,0,0,.15); z-index: 50; transition: right .25s; overflow-y: auto; padding: 18px; }
+  .sidebar-panel.open { right: 0; }
+  .sidebar-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--purple-dark); margin-bottom: 16px; font-size: 15px; }
+  .sidebar-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--muted); }
+  .sidebar-section { margin-bottom: 24px; }
+  .sidebar-section-title { font-size: 13px; font-weight: 700; color: var(--purple-dark); margin-bottom: 10px; }
+  .sidebar-list { display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-item { display: block; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 12.5px; color: var(--text); text-decoration: none; }
+  .sidebar-item:hover { background: var(--purple-light); }
+  .sidebar-empty { font-size: 12px; color: var(--muted); }
+
+  .password-gate { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .password-gate.hidden { display: none; }
+  .password-box { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; max-width: 320px; text-align: center; }
+  .password-title { font-size: 20px; font-weight: 800; color: var(--purple-dark); margin-bottom: 6px; }
+  .password-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
+  .password-box input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; margin-bottom: 10px; box-sizing: border-box; }
+  .password-box button { width: 100%; padding: 10px; border: none; border-radius: 8px; background: var(--purple); color: white; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .password-error { color: var(--red); font-size: 12px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="password-gate" id="passwordGate">
+  <div class="password-box">
+    <div class="password-title">WoW CSI 2026</div>
+    <div class="password-sub">Conteúdo restrito ao time. Digite a senha para continuar.</div>
+    <input type="password" id="passwordInput" placeholder="Senha">
+    <button id="passwordSubmit">Entrar</button>
+    <div class="password-error" id="passwordError" style="display:none;">Senha incorreta.</div>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="sidebar-panel" id="sidebarPanel">
+  <div class="sidebar-header">
+    <span>Recursos do time</span>
+    <button class="sidebar-close" id="sidebarClose">✕</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">🎥 Vídeos Quarta WoW</div>
+    <div id="sidebarVideos" class="sidebar-list"></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">💡 Dicas de atendimento e conexão</div>
+    <div id="sidebarTips" class="sidebar-list"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1><img class="mascot-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABAAEADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFBgIBB//EADMQAAICAQIEBAUCBQUAAAAAAAECAwQRAAUSEyExIkFRYRQycZGhBrEjM0KBwXKCktHh/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQMEAAUC/8QAJBEBAAEEAQMEAwAAAAAAAAAAAQACAxEhEhMUMUFRcYEEQvD/2gAMAwEAAhEDEQA/ANgtOGfbx1CyjPX1+upVWQ1bJ6woVOCCTnGrBlSvtht8t5FAJIUdcazsc8e5TvaiVlVm7MOo1I6xKTyypO/E8kYrziGVeJZeUeDP17am1+GT5SucZ8XcjTcNjjVohYYqh4SvEcA+mkDAIrNc/EKohZuncyA+Xtp1FBXk9YQwR1rEFKrLYsyKkaY6jz9tR9y3+f4OnPQEcQnd1PxA7cIB0H9ROL6R1q0gkZWHFGvVupA7eeqNraFj2qvBLGnMVmcefA3TH2wNFKbYNcFWeOvMk19+3mV3XmUBwNw9R3+nXtpsbxvA7z7b/wAv/dTrMm7UxhjCyuxbMa+ZJJ/c6LVu7rfmU8EWAxUytEMLkHP4P51TxoxyMYiVQy5xPpu0xR2aCoyhkYN0I6EZ1EsbdHSvTRRKFTjyABgDVLYr6LKKWMSIhdgfJc99eX2SW3Iw7E65/IQY39mQEaOa1Ig8LK5Xr20ludilT5dm0xMcqlI0ROJmbixkn8Y+p09Mj1ppZIoJJGdz0H76j3fiLdJikrwNEzH+Dgj6HI79+3vptqqvbjxGjnAsmuIdttKWmy4bmJwoPU5yfPy+2qH6g3/mSpFXaWu9dwXDL0kBHQD11ka+51INxWS5Vs2Yk6+JwrSN7+3sNU953ld4spOIFi8IVVPXAHmdUBy3UTYM6jy3Xs040mIZgR4wfn6dT9+n9taWrWrCj8Srgxr2RfP66lbZd2m7SWpUpFOQvBxyqOJh6gj303caLboY4ubHE8gJ4CQMDXMu3Hr9MpdefuPu8O2B+ZRaOaO3FPDhTMCgJk4Q5AyBkDI7aFe3CxUuTQuQ8ikDJ9caS3XfpaVmtXgflmIcZyAQxOf8aJvlGzJuMlqJozE3Cw8fXOB5fXRUzqKLaYqfWdPuNiWtIk1cwyqMHhJBb6f21Nr7lJVXkJUjkikOHjfuc9CckHROTLKsl62hkkhyxJJySOw/bV7nVKyGSOlFKsqhgxY9iNUc3oIGczADuYfddojeWsZxxAOomKnBxn/rWg3fZtso7W81fb4uVEhdsd2Hl1PXUnfbSpCeWioSyr4SSSSffS+4bhI+2inGWdpfB83QDp0xptuhu0GdQOSrUeq7duSLBc2mCukb4cBj0I9CNMb3sty5blnrV4pGsIONp3/lnGML7e+hwxTwVIolkccCAYDaE1mdThpJAf8AUdMotcd0/wB8yS9+TzUZsIqccb8wojSduMg5A13NC8rZVgv+5tFJPqftrniYeuuW7lhmBlqyS13gZo+Fxg+Ek6xks257bukW0y8D15JAqyLk8oE48vLPrrZ2pJ+QRAQr+pOP8H9tZiTaLLW5Jmny0rhnLeIkjz6AD8adTUU0Iv1PRmT/ANR7HaprWnMyzAzcIRVIwcdyTp7ZNi59KK20qcw56EfKc6rTJJZheOxmRWHbA9c6BXW9zXBjSKL+kLwj8KNei4lGmarZhnlnZ7TrwxW44/U8JJ0AbDOVxLcRyPPgOqipJ/U5+2iqPUsdDuLnvJ+3t+0//9k=" alt="Faísca">WoW CSI 2026</h1>
+      <div class="subtitle">Aqui levamos o conceito de Spark The Magic na prática</div>
+    </div>
+    <div class="header-actions">
+      <span class="badge" id="lastUpdated"></span>
+      <button class="sidebar-btn" id="sidebarOpenBtn">☰ Vídeos &amp; Dicas</button>
+    </div>
+  </header>
+
+  <div class="period-bar">
+    <label for="periodSelect">Período:</label>
+    <select id="periodSelect"></select>
+    <span class="period-hint">já aberto no mês atual — escolha outro mês ou o semestre completo se quiser</span>
+  </div>
+
+  <div class="section-title" style="margin-top:0;padding-top:0;border-top:none;">Metas do mês — <span id="goalsMonthLabel"></span></div>
+  <div class="goal-cards" id="goalCards"></div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="statTotalWows">-</div><div class="label">WoWs no período selecionado</div></div>
+    <div class="stat-card"><div class="num" id="statTotalXmarts">-</div><div class="label">Xmarts que submeteram</div></div>
+    <div class="stat-card"><div class="num" id="statTotalTimes">-</div><div class="label">Times participando</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="geral">Visão Geral</button>
+    <button class="tab-btn" data-tab="xmarts">Xmarts</button>
+  </div>
+
+  <div class="panel active" id="panel-geral">
+    <div class="quality-hero">
+      <div class="qh-title">Termômetro de qualidade das histórias</div>
+      <div class="quality-bar" id="qualityBar"></div>
+      <div class="quality-legend" id="qualityLegend"></div>
+      <div class="callout">A qualidade das histórias varia conforme o que foi submetido no WoW HUB — é necessário colocar qual foi o problema, qual foi a solução encontrada e como a conexão foi feita. Pra ter conexão, tem que ter troca — não se esqueçam!</div>
+    </div>
+    <div class="quality-cards" id="qualityCards"></div>
+    <div class="quality-insights" id="qualityInsights"></div>
+    <div class="chart-box"><h3>Distribuição de classificação (Faísca IA)</h3><canvas id="chartQuality"></canvas></div>
+
+    <div class="section-title">Engajamento por time</div>
+    <div class="toggle-group" id="teamsMetricToggle">
+      <button class="toggle-btn active" data-metric="xmarts">Mais pessoas engajadas</button>
+      <button class="toggle-btn" data-metric="count">Mais casos registrados</button>
+    </div>
+    <div class="toolbar"><input type="search" id="searchTimes" placeholder="Buscar time ou líder..."></div>
+    <div id="podiumTimes" class="podium"></div>
+    <table class="rank-table">
+      <thead><tr><th>#</th><th>Time</th><th>Líder (Xforce)</th><th>Xmarts ativos</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
+      <tbody id="tbodyTimes"></tbody>
+    </table>
+    <div class="chart-box"><h3 id="chartTimesTitle">Top 10 Times</h3><canvas id="chartTimes"></canvas></div>
+
+    <div class="section-title">WoWs por time e canal de atendimento</div>
+    <div class="channel-summary" id="channelSummary"></div>
+    <table class="rank-table">
+      <thead id="channelsThead"></thead>
+      <tbody id="channelsTbody"></tbody>
+    </table>
+    <div class="chart-box"><h3>Top 10 Times · WoWs por canal</h3><canvas id="chartChannels"></canvas></div>
+  </div>
+
+  <div class="panel" id="panel-xmarts">
+    <div class="toolbar"><input type="search" id="searchXmarts" placeholder="Buscar por nome, time ou liderança..."></div>
+    <div class="critical-note" id="criticalNote" style="display:none;"></div>
+    <div id="podiumXmarts" class="podium"></div>
+    <table class="rank-table">
+      <thead><tr><th>#</th><th>Xmart</th><th>Time</th><th>Liderança</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
+      <tbody id="tbodyXmarts"></tbody>
+    </table>
+    <div class="chart-box"><h3>Top 10 Xmarts</h3><canvas id="chartXmarts"></canvas></div>
+  </div>
+
+  <footer class="note" id="footerNote">Fonte: planilha "Base Faísca H22026" (aba "(Automatização) WoWs Faísca" + "Times e bandeiras"). Qualidade calculada a partir da coluna "Marcação Faísca (IA)". Atualizado automaticamente todas as manhãs.</footer>
+</div>
+
+<script>
+
+let charts = {};
+let currentTeamsMetric = "xmarts";
+let MANIFEST = null;
+const periodCache = {};
+
+const GOALS = { wows: 120, xmarts: 200, teams: 28 };
+const CHANNEL_LABELS = { phone: "Telefone", chat: "Chat", backoffice: "Backoffice", zendesk: "Zendesk", outros: "Outros" };
+const CHANNEL_COLORS = { phone: "#820AD1", chat: "#17a673", backoffice: "#d69e00", zendesk: "#2563eb", outros: "#9a8ba8" };
+
 const SITE_PASSWORD = "********";
+
+const SIDEBAR_DATA = {
+  videos: [],
+  tips: [],
+};
+
+function renderSidebarList(containerId, items) {
+  const el = document.getElementById(containerId);
+  if (!items || items.length === 0) {
+    el.innerHTML = '<div class="sidebar-empty">Em breve — peça pro Wagner adicionar aqui.</div>';
+    return;
+  }
+  el.innerHTML = items.map(it => `<a class="sidebar-item" href="${it.url}" target="_blank" rel="noopener">${it.title}</a>`).join("");
+}
+
+function initSidebar() {
+  renderSidebarList("sidebarVideos", SIDEBAR_DATA.videos);
+  renderSidebarList("sidebarTips", SIDEBAR_DATA.tips);
+  const panel = document.getElementById("sidebarPanel");
+  const overlay = document.getElementById("sidebarOverlay");
+  const open = () => { panel.classList.add("open"); overlay.classList.add("open"); };
+  const close = () => { panel.classList.remove("open"); overlay.classList.remove("open"); };
+  document.getElementById("sidebarOpenBtn").addEventListener("click", open);
+  document.getElementById("sidebarClose").addEventListener("click", close);
+  overlay.addEventListener("click", close);
+}
+
+function initPasswordGate() {
+  const gate = document.getElementById("passwordGate");
+  if (sessionStorage.getItem("wowCsiAuth") === "1") {
+    gate.classList.add("hidden");
+    return;
+  }
+  const input = document.getElementById("passwordInput");
+  const error = document.getElementById("passwordError");
+  const submit = () => {
+    if (input.value === SITE_PASSWORD) {
+      sessionStorage.setItem("wowCsiAuth", "1");
+      gate.classList.add("hidden");
+    } else {
+      error.style.display = "block";
+    }
+  };
+  document.getElementById("passwordSubmit").addEventListener("click", submit);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+}
+
+function renderPodium(containerId, items, valueKey, unitLabel, subFn, topN) {
+  topN = topN || 3;
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  el.classList.toggle("flat", topN > 3);
+  const top = items.slice(0, topN);
+  if (top.length === 0) { el.innerHTML = '<div class="empty-msg">Sem dados neste período.</div>'; return; }
+  top.forEach((item, i) => {
+    const pClass = "p" + Math.min(i + 1, 5);
+    const card = document.createElement("div");
+    card.className = "podium-card " + pClass;
+    const value = item[valueKey];
+    const medal = i < 3 ? "★" : ((i + 1) + "º");
+    card.innerHTML = `
+      <div class="medal ${pClass}">${medal}</div>
+      <div class="podium-name">${item.name}</div>
+      <div class="podium-count">${value}</div>
+      <div class="podium-sub">${unitLabel}${subFn ? " · " + subFn(item) : ""}</div>
+    `;
+    el.appendChild(card);
+  });
+}
+
+function renderTable(tbodyId, items, rowRenderer, colspan) {
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = "";
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="${colspan || 6}" class="empty-msg">Nenhum resultado neste período.</td></tr>`;
+    return;
+  }
+  items.forEach((item, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = rowRenderer(item, idx);
+    tbody.appendChild(tr);
+  });
+}
+
+function barCellHtml(count, max) {
+  const pct = max > 0 ? Math.max(4, Math.round((count / max) * 100)) : 0;
+  return `<div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>`;
+}
+
+function renderChart(canvasId, labels, data, color) {
+  const ctx = document.getElementById(canvasId).getContext("2d");
+  if (charts[canvasId]) charts[canvasId].destroy();
+  charts[canvasId] = new Chart(ctx, {
+    type: "bar",
+    data: { labels: labels, datasets: [{ data: data, backgroundColor: color, borderRadius: 6 }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: "y",
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+    }
+  });
+}
+
+function teamRowHtml(it, idx, max, metric) {
+  return `
+    <td class="rank-num">${idx + 1}</td>
+    <td>${it.name}</td>
+    <td>${it.leaderName}</td>
+    <td>${it.xmarts}</td>
+    <td class="bar-cell">${barCellHtml(it[metric], max)}</td>
+    <td class="count-cell">${it.count}</td>
+  `;
+}
+
+function renderTeamsPanel(period, metric) {
+  const sorted = [...period.teams].filter(t => t.name !== "-").sort((a, b) => b[metric] - a[metric] || a.name.localeCompare(b.name));
+  const max = sorted.length ? sorted[0][metric] : 0;
+  const unitLabel = metric === "xmarts" ? "pessoas engajadas" : "casos registrados";
+  const titleEl = document.getElementById("chartTimesTitle");
+  if (titleEl) titleEl.textContent = metric === "xmarts" ? "Top 10 Times · Pessoas engajadas" : "Top 10 Times · Casos registrados";
+
+  renderPodium("podiumTimes", sorted, metric, unitLabel, it => `Líder: ${it.leaderName}`, 3);
+  renderTable("tbodyTimes", sorted, (it, idx) => teamRowHtml(it, idx, max, metric), 6);
+  renderChart("chartTimes", sorted.slice(0, 10).map(it => it.name), sorted.slice(0, 10).map(it => it[metric]), "#820AD1");
+
+  const searchEl = document.getElementById("searchTimes");
+  searchEl.value = "";
+  searchEl.oninput = (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = q ? sorted.filter(it => (it.name + " " + it.leaderName).toLowerCase().includes(q)) : sorted;
+    renderTable("tbodyTimes", filtered, (it) => teamRowHtml(it, sorted.indexOf(it), max, metric), 6);
+  };
+}
+
+function renderXmartsPanel(period) {
+  const fullList = period.xmarts;
+  const excluded = fullList.filter(x => x.critical).length;
+  const xmartList = fullList.filter(x => !x.critical);
+  const maxXmart = xmartList.length ? xmartList[0].count : 0;
+  const xmartRow = (it, idx) => `
+    <td class="rank-num">${idx + 1}</td>
+    <td>${it.name}</td>
+    <td>${it.team}</td>
+    <td>${it.leaderName || "-"}</td>
+    <td class="bar-cell">${barCellHtml(it.count, maxXmart)}</td>
+    <td class="count-cell">${it.count}</td>
+  `;
+
+  const noteEl = document.getElementById("criticalNote");
+  if (excluded > 0) {
+    noteEl.style.display = "block";
+    noteEl.textContent = `${excluded} agente${excluded === 1 ? "" : "s"} não aparece${excluded === 1 ? "" : "m"} neste ranking por ter tido pelo menos 1 atendimento delicado (contestação aberta) no período.`;
+  } else {
+    noteEl.style.display = "none";
+  }
+
+  renderPodium("podiumXmarts", xmartList, "count", "WoWs", it => it.team !== "-" ? it.team : "", 5);
+  renderTable("tbodyXmarts", xmartList, xmartRow, 6);
+  renderChart("chartXmarts", xmartList.slice(0, 10).map(it => it.name), xmartList.slice(0, 10).map(it => it.count), "#820AD1");
+
+  const searchEl = document.getElementById("searchXmarts");
+  searchEl.value = "";
+  searchEl.oninput = (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = q ? xmartList.filter(it => (it.name + " " + it.team + " " + (it.leaderName || "") + " " + it.email).toLowerCase().includes(q)) : xmartList;
+    renderTable("tbodyXmarts", filtered, (it) => xmartRow(it, xmartList.indexOf(it)), 6);
+  };
+}
+
+function renderChannelsPanel(period) {
+  const teams = [...period.teams].filter(t => t.name !== "-").sort((a, b) => b.count - a.count);
+  const channelKeysSet = new Set();
+  teams.forEach(t => Object.keys(t.channels || {}).forEach(k => channelKeysSet.add(k)));
+  const preferredOrder = ["phone", "chat", "backoffice", "zendesk", "outros"];
+  const channelKeys = preferredOrder.filter(k => channelKeysSet.has(k)).concat([...channelKeysSet].filter(k => !preferredOrder.includes(k)));
+
+  document.getElementById("channelsThead").innerHTML = `<tr><th>Time</th>${channelKeys.map(k => `<th>${CHANNEL_LABELS[k] || k}</th>`).join("")}<th>Total</th></tr>`;
+  const rows = teams.map(t => `<tr><td>${t.name}</td>${channelKeys.map(k => `<td>${(t.channels && t.channels[k]) || 0}</td>`).join("")}<td class="count-cell">${t.count}</td></tr>`).join("");
+  document.getElementById("channelsTbody").innerHTML = rows || `<tr><td colspan="${channelKeys.length + 2}" class="empty-msg">Sem dados neste período.</td></tr>`;
+
+  const co = period.channels_overall || {};
+  document.getElementById("channelSummary").textContent = channelKeys.length
+    ? "Total do período: " + channelKeys.map(k => `${co[k] || 0} ${(CHANNEL_LABELS[k] || k).toLowerCase()}`).join(" · ")
+    : "";
+
+  const top10 = teams.slice(0, 10);
+  if (charts["chartChannels"]) charts["chartChannels"].destroy();
+  const ctx = document.getElementById("chartChannels").getContext("2d");
+  charts["chartChannels"] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: top10.map(t => t.name),
+      datasets: channelKeys.map(k => ({
+        label: CHANNEL_LABELS[k] || k,
+        data: top10.map(t => (t.channels && t.channels[k]) || 0),
+        backgroundColor: CHANNEL_COLORS[k] || "#ccc",
+      })),
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: "bottom" } },
+      scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } } },
+    },
+  });
+}
+
+function renderGoals(monthPeriod, monthLabel) {
+  document.getElementById("goalsMonthLabel").textContent = monthLabel || "mês atual";
+  const wrap = document.getElementById("goalCards");
+  if (!monthPeriod) {
+    wrap.innerHTML = `<div class="empty-msg">Sem dados ainda para ${monthLabel || "este mês"}.</div>`;
+    return;
+  }
+  const items = [
+    { label: "WoWs no mês", value: monthPeriod.total_wows, goal: GOALS.wows },
+    { label: "Xmarts engajados", value: monthPeriod.total_xmarts, goal: GOALS.xmarts },
+    { label: "Times participando", value: monthPeriod.total_teams, goal: GOALS.teams },
+  ];
+  wrap.innerHTML = items.map(it => {
+    const pct = Math.min(100, Math.round((it.value / it.goal) * 100));
+    const done = it.value >= it.goal;
+    const diff = it.value - it.goal;
+    const diffText = done ? `+${diff} acima da meta` : `faltam ${Math.abs(diff)} para a meta`;
+    return `
+      <div class="goal-card ${done ? "done" : ""}">
+        <div class="goal-label">${it.label}</div>
+        <div class="goal-num">${it.value}<span class="goal-target"> / ${it.goal}</span></div>
+        <div class="goal-progress-bg"><div class="goal-progress-fill" style="width:${pct}%"></div></div>
+        <div class="goal-sub">${diffText}</div>
+      </div>`;
+  }).join("");
+}
+
+function renderQualityPanel(period) {
+  const q = period.quality || { total: 0, green: 0, yellow: 0, red: 0, pending: 0, green_pct: 0, yellow_pct: 0, red_pct: 0, red_breakdown: { atencao: 0, atendimento_delicado: 0 } };
+  const classified = q.green + q.yellow + q.red;
+
+  const bar = document.getElementById("qualityBar");
+  bar.innerHTML = "";
+  if (classified === 0) {
+    bar.innerHTML = '<div class="quality-seg pending" style="width:100%;background:var(--pending);">Sem histórias classificadas ainda</div>';
+  } else {
+    const segs = [
+      { cls: "green", pct: q.green_pct, label: `${q.green_pct}%` },
+      { cls: "yellow", pct: q.yellow_pct, label: `${q.yellow_pct}%` },
+      { cls: "red", pct: q.red_pct, label: `${q.red_pct}%` },
+    ];
+    segs.forEach(s => {
+      if (s.pct <= 0) return;
+      const seg = document.createElement("div");
+      seg.className = "quality-seg " + s.cls;
+      seg.style.width = s.pct + "%";
+      seg.textContent = s.pct >= 8 ? s.label : "";
+      bar.appendChild(seg);
+    });
+  }
+
+  document.getElementById("qualityLegend").innerHTML = `
+    <div class="quality-legend-item"><span class="quality-dot green"></span>É WOW — ${q.green} (${q.green_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot yellow"></span>OK — ${q.yellow} (${q.yellow_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot red"></span>Precisa de atenção — ${q.red} (${q.red_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot pending"></span>Ainda não avaliado — ${q.pending}</div>
+  `;
+
+  document.getElementById("qualityCards").innerHTML = `
+    <div class="quality-card green"><div class="qc-label">É WOW</div><div class="qc-num">${q.green}</div><div class="qc-sub">${q.green_pct}% das histórias avaliadas</div></div>
+    <div class="quality-card yellow"><div class="qc-label">OK</div><div class="qc-num">${q.yellow}</div><div class="qc-sub">${q.yellow_pct}% das histórias avaliadas</div></div>
+    <div class="quality-card red"><div class="qc-label">Precisa de atenção</div><div class="qc-num">${q.red}</div><div class="qc-sub">${q.red_pct}% · ${q.red_breakdown.atencao} p/ melhorar info · ${q.red_breakdown.atendimento_delicado} contestação aberta</div></div>
+    <div class="quality-card pending"><div class="qc-label">Pendente</div><div class="qc-num">${q.pending}</div><div class="qc-sub">Ainda não avaliadas pela Faísca IA</div></div>
+  `;
+
+  const insights = document.getElementById("qualityInsights");
+  if (classified === 0) {
+    insights.innerHTML = "";
+  } else {
+    const attentionMsg = q.red > 0
+      ? `<b>${q.red}</b> história${q.red === 1 ? "" : "s"} (${q.red_pct}%) precisam de atenção neste período — ${q.red_breakdown.atendimento_delicado} com contestação aberta e ${q.red_breakdown.atencao} para melhorar a forma de contar a história.`
+      : `Nenhuma história marcada como "precisa de atenção" neste período.`;
+    const highlightMsg = `<b>${q.green_pct}%</b> das histórias avaliadas neste período foram classificadas como "É WOW" (${q.green} de ${classified} avaliadas)${q.pending ? `, com ${q.pending} ainda pendentes de avaliação` : ""}.`;
+    insights.innerHTML = `
+      <div class="insight-card attention"><div class="ic-title">Ponto de atenção</div>${attentionMsg}</div>
+      <div class="insight-card highlight"><div class="ic-title">Destaque do período</div>${highlightMsg}</div>
+    `;
+  }
+
+  if (charts["chartQuality"]) charts["chartQuality"].destroy();
+  const ctx = document.getElementById("chartQuality").getContext("2d");
+  charts["chartQuality"] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["É WOW", "OK", "Precisa de atenção", "Pendente"],
+      datasets: [{ data: [q.green, q.yellow, q.red, q.pending], backgroundColor: ["#17a673", "#d69e00", "#d93636", "#9a8ba8"], borderWidth: 0 }],
+    },
+    options: { plugins: { legend: { position: "bottom", labels: { font: { size: 12 } } } } },
+  });
+}
+
+function renderPeriod(period) {
+  document.getElementById("statTotalWows").textContent = period.total_wows;
+  document.getElementById("statTotalXmarts").textContent = period.total_xmarts;
+  document.getElementById("statTotalTimes").textContent = period.total_teams;
+
+  window.__currentPeriod = period;
+  currentTeamsMetric = "xmarts";
+  document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(b => b.classList.toggle("active", b.dataset.metric === currentTeamsMetric));
+
+  renderQualityPanel(period);
+  renderTeamsPanel(period, currentTeamsMetric);
+  renderChannelsPanel(period);
+  renderXmartsPanel(period);
+}
+
+document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentTeamsMetric = btn.dataset.metric;
+    document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(b => b.classList.toggle("active", b === btn));
+    if (window.__currentPeriod) renderTeamsPanel(window.__currentPeriod, currentTeamsMetric);
+  });
+});
+
+async function loadPeriod(key) {
+  if (periodCache[key]) return periodCache[key];
+  const res = await fetch(`data-${key}.json`);
+  const data = await res.json();
+  periodCache[key] = data;
+  return data;
+}
+
+async function main() {
+  initPasswordGate();
+  initSidebar();
+
+  const res = await fetch("manifest.json");
+  MANIFEST = await res.json();
+
+  document.getElementById("lastUpdated").textContent = "Atualizado em " + new Date(MANIFEST.generated_at).toLocaleString("pt-BR");
+
+  const select = document.getElementById("periodSelect");
+  MANIFEST.periods.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.key;
+    opt.textContent = `${p.label} (${p.total_wows} WoWs)`;
+    select.appendChild(opt);
+  });
+
+  const now = new Date();
+  const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const currentMonthMeta = MANIFEST.periods.find(p => p.key === currentMonthKey);
+
+  let defaultKey = currentMonthMeta ? currentMonthKey : null;
+  if (!defaultKey) {
+    const monthPeriods = MANIFEST.periods.filter(p => p.key !== "semester");
+    defaultKey = (monthPeriods[monthPeriods.length - 1] || MANIFEST.periods[0]).key;
+  }
+  select.value = defaultKey;
+
+  select.addEventListener("change", async () => {
+    const period = await loadPeriod(select.value);
+    renderPeriod(period);
+  });
+
+  const defaultPeriod = await loadPeriod(defaultKey);
+  renderPeriod(defaultPeriod);
+
+  if (currentMonthMeta) {
+    const monthPeriod = defaultKey === currentMonthKey ? defaultPeriod : await loadPeriod(currentMonthKey);
+    renderGoals(monthPeriod, currentMonthMeta.label);
+  } else {
+    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+    renderGoals(null, `${monthNames[now.getMonth()]} de ${now.getFullYear()}`);
+  }
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+  });
+});
+
+main();
+</script>
+</body>
+</html>
