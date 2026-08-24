@@ -1,1 +1,27 @@
-{"generated_at": "2026-08-21T16:35:56.193771", "semester_label": "2º semestre de 2026", "periods": [{"key": "semester", "label": "Semestre completo (2º semestre de 2026)", "total_wows": 503, "total_xmarts": 155, "total_teams": 29}, {"key": "2026-07", "label": "Julho 2026", "total_wows": 283, "total_xmarts": 110, "total_teams": 28}, {"key": "2026-08", "label": "Agosto 2026", "total_wows": 220, "total_xmarts": 103, "total_teams": 27}]}
+{
+  "generated_at": "2026-08-24T17:05:01-03:00",
+  "semester_label": "Semestre completo (2º semestre de 2026)",
+  "periods": [
+    {
+      "key": "semester",
+      "label": "Semestre completo (2º semestre de 2026)",
+      "total_wows": 543,
+      "total_xmarts": 163,
+      "total_teams": 28
+    },
+    {
+      "key": "2026-07",
+      "label": "Julho 2026",
+      "total_wows": 283,
+      "total_xmarts": 110,
+      "total_teams": 27
+    },
+    {
+      "key": "2026-08",
+      "label": "Agosto 2026",
+      "total_wows": 260,
+      "total_xmarts": 117,
+      "total_teams": 28
+    }
+  ]
+}
