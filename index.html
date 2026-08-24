@@ -55,21 +55,6 @@
     padding: 5px 12px;
     border-radius: 999px;
   }
-  .wallpaper-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: white;
-    color: var(--purple-dark);
-    border: 1.5px solid var(--purple);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 999px;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .wallpaper-btn:hover { background: var(--purple-light); }
   .period-bar {
     display: flex;
     align-items: center;
@@ -157,7 +142,7 @@
 <div class="wrap">
   <header class="top">
     <div>
-      <h1><img class="mascot-icon" src="data:image/png;base64,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" alt="Mascote WoW">WoW H2 - CSI</h1>
+      <h1><img class="mascot-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABAAEADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFBgIBB//EADMQAAICAQIEBAUCBQUAAAAAAAECAwQRAAUSEyExIkFRYRQycZGhBrEjM0KBwXKCktHh/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQMEAAUC/8QAJBEBAAEEAQMEAwAAAAAAAAAAAQACAxEhEhMUMUFRcYEEQvD/2gAMAwEAAhEDEQA/ANgtOGfbx1CyjPX1+upVWQ1bJ6woVOCCTnGrBlSvtht8t5FAJIUdcazsc8e5TvaiVlVm7MOo1I6xKTyypO/E8kYrziGVeJZeUeDP17am1+GT5SucZ8XcjTcNjjVohYYqh4SvEcA+mkDAIrNc/EKohZuncyA+Xtp1FBXk9YQwR1rEFKrLYsyKkaY6jz9tR9y3+f4OnPQEcQnd1PxA7cIB0H9ROL6R1q0gkZWHFGvVupA7eeqNraFj2qvBLGnMVmcefA3TH2wNFKbYNcFWeOvMk19+3mV3XmUBwNw9R3+nXtpsbxvA7z7b/wAv/dTrMm7UxhjCyuxbMa+ZJJ/c6LVu7rfmU8EWAxUytEMLkHP4P51TxoxyMYiVQy5xPpu0xR2aCoyhkYN0I6EZ1EsbdHSvTRRKFTjyABgDVLYr6LKKWMSIhdgfJc99eX2SW3Iw7E65/IQY39mQEaOa1Ig8LK5Xr20ludilT5dm0xMcqlI0ROJmbixkn8Y+p09Mj1ppZIoJJGdz0H76j3fiLdJikrwNEzH+Dgj6HI79+3vptqqvbjxGjnAsmuIdttKWmy4bmJwoPU5yfPy+2qH6g3/mSpFXaWu9dwXDL0kBHQD11ka+51INxWS5Vs2Yk6+JwrSN7+3sNU953ld4spOIFi8IVVPXAHmdUBy3UTYM6jy3Xs040mIZgR4wfn6dT9+n9taWrWrCj8Srgxr2RfP66lbZd2m7SWpUpFOQvBxyqOJh6gj303caLboY4ubHE8gJ4CQMDXMu3Hr9MpdefuPu8O2B+ZRaOaO3FPDhTMCgJk4Q5AyBkDI7aFe3CxUuTQuQ8ikDJ9caS3XfpaVmtXgflmIcZyAQxOf8aJvlGzJuMlqJozE3Cw8fXOB5fXRUzqKLaYqfWdPuNiWtIk1cwyqMHhJBb6f21Nr7lJVXkJUjkikOHjfuc9CckHROTLKsl62hkkhyxJJySOw/bV7nVKyGSOlFKsqhgxY9iNUc3oIGczADuYfddojeWsZxxAOomKnBxn/rWg3fZtso7W81fb4uVEhdsd2Hl1PXUnfbSpCeWioSyr4SSSSffS+4bhI+2inGWdpfB83QDp0xptuhu0GdQOSrUeq7duSLBc2mCukb4cBj0I9CNMb3sty5blnrV4pGsIONp3/lnGML7e+hwxTwVIolkccCAYDaE1mdThpJAf8AUdMotcd0/wB8yS9+TzUZsIqccb8wojSduMg5A13NC8rZVgv+5tFJPqftrniYeuuW7lhmBlqyS13gZo+Fxg+Ek6xks257bukW0y8D15JAqyLk8oE48vLPrrZ2pJ+QRAQr+pOP8H9tZiTaLLW5Jmny0rhnLeIkjz6AD8adTUU0Iv1PRmT/ANR7HaprWnMyzAzcIRVIwcdyTp7ZNi59KK20qcw56EfKc6rTJJZheOxmRWHbA9c6BXW9zXBjSKL+kLwj8KNei4lGmarZhnlnZ7TrwxW44/U8JJ0AbDOVxLcRyPPgOqipJ/U5+2iqPUsdDuLnvJ+3t+0//9k=" alt="Mascote WoW">WoW H2 - CSI</h1>
       <div class="subtitle" id="semesterLabel"></div>
     </div>
     <div class="header-actions">
@@ -411,15 +396,26 @@ document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(btn => {
   });
 });
 
-async function main() {
-  const res = await fetch("data.json");
-  RANKING_DATA = await res.json();
+let MANIFEST = null;
+const periodCache = {};
 
-  document.getElementById("semesterLabel").textContent = `WoW H2 - CSI · ${RANKING_DATA.semester_label}`;
-  document.getElementById("lastUpdated").textContent = "Atualizado em " + new Date(RANKING_DATA.generated_at).toLocaleString("pt-BR");
+async function loadPeriod(key) {
+  if (periodCache[key]) return periodCache[key];
+  const res = await fetch(`data-${key}.json`);
+  const data = await res.json();
+  periodCache[key] = data;
+  return data;
+}
+
+async function main() {
+  const res = await fetch("manifest.json");
+  MANIFEST = await res.json();
+
+  document.getElementById("semesterLabel").textContent = `WoW H2 - CSI · ${MANIFEST.semester_label}`;
+  document.getElementById("lastUpdated").textContent = "Atualizado em " + new Date(MANIFEST.generated_at).toLocaleString("pt-BR");
 
   const select = document.getElementById("periodSelect");
-  RANKING_DATA.periods.forEach(p => {
+  MANIFEST.periods.forEach(p => {
     const opt = document.createElement("option");
     opt.value = p.key;
     opt.textContent = `${p.label} (${p.total_wows} WoWs)`;
@@ -428,18 +424,19 @@ async function main() {
 
   const now = new Date();
   const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  let defaultPeriod = RANKING_DATA.periods.find(p => p.key === currentMonthKey);
-  if (!defaultPeriod) {
-    const monthPeriods = RANKING_DATA.periods.filter(p => p.key !== "semester");
-    defaultPeriod = monthPeriods[monthPeriods.length - 1] || RANKING_DATA.periods[0];
+  let defaultKey = MANIFEST.periods.some(p => p.key === currentMonthKey) ? currentMonthKey : null;
+  if (!defaultKey) {
+    const monthPeriods = MANIFEST.periods.filter(p => p.key !== "semester");
+    defaultKey = (monthPeriods[monthPeriods.length - 1] || MANIFEST.periods[0]).key;
   }
-  select.value = defaultPeriod.key;
+  select.value = defaultKey;
 
-  select.addEventListener("change", () => {
-    const period = RANKING_DATA.periods.find(p => p.key === select.value);
-    if (period) renderPeriod(period);
+  select.addEventListener("change", async () => {
+    const period = await loadPeriod(select.value);
+    renderPeriod(period);
   });
 
+  const defaultPeriod = await loadPeriod(defaultKey);
   renderPeriod(defaultPeriod);
 }
 
