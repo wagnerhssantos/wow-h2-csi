@@ -1,22 +1,18 @@
-<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
-{
-  "name": "Ranking WoW H2 - CSI",
-  "schemaVersion": 1,
-  "description": "Ranking de Xmarts, times e lideranças por WoWs submetidas no WoW H2 - CSI no semestre atual, calculado em tempo real a partir da planilha \"Base Faísca H22026\".",
-  "mcpTools": [],
-  "mcpServerNames": []
-}
-</script>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Ranking WoW H2 - CSI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WoW CSI 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
   :root {
     color-scheme: light;
     --purple: #820AD1;
-    --purple-dark: #5c0796;
+    --purple-dark: #4a0670;
+    --violet: #a855f7;
+    --pink: #ec4899;
+    --orange: #f59e0b;
     --purple-light: #f3e6fc;
     --bg: #faf8fc;
     --text: #2b1338;
@@ -40,86 +36,97 @@
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
+    overflow-x: hidden;
   }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
-  header.top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+
+  /* decorative background blobs */
+  .blob { position: fixed; border-radius: 50%; filter: blur(60px); opacity: .28; z-index: 0; pointer-events: none; }
+  .blob.b1 { width: 340px; height: 340px; background: var(--purple); top: -120px; right: -100px; }
+  .blob.b2 { width: 280px; height: 280px; background: var(--pink); bottom: -100px; left: -80px; }
+  .blob.b3 { width: 220px; height: 220px; background: var(--orange); bottom: 30%; right: 10%; opacity: .15; }
+
+  .wrap { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* hero */
+  .hero {
+    background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 55%, var(--violet) 100%);
+    border-radius: 22px;
+    padding: 26px 28px;
+    color: white;
     margin-bottom: 18px;
+    box-shadow: 0 12px 30px -12px rgba(74, 6, 112, 0.45);
+    position: relative;
+    overflow: hidden;
   }
-  h1 { font-size: 24px; margin: 0; color: var(--purple-dark); display: flex; align-items: center; }
-  h1 .mascot-icon { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; margin-right: 8px; border: 2px solid var(--purple-light); flex-shrink: 0; }
-  .subtitle { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .hero::after {
+    content: ""; position: absolute; width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); top: -80px; right: -40px;
+  }
+  .hero-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+  h1 { font-size: 25px; margin: 0; color: white; display: flex; align-items: center; font-weight: 800; }
+  h1 .mascot-icon { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid rgba(255,255,255,0.6); flex-shrink: 0; }
+  .subtitle { color: rgba(255,255,255,0.85); font-size: 13.5px; margin-top: 6px; max-width: 480px; }
   .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
   .badge {
     display: inline-block;
-    background: var(--purple);
+    background: rgba(255,255,255,0.18);
     color: white;
     font-size: 12px;
     font-weight: 600;
     padding: 5px 12px;
     border-radius: 999px;
+    backdrop-filter: blur(2px);
   }
+  .sidebar-btn { background: white; border: none; color: var(--purple-dark); font-weight: 700; font-size: 12.5px; padding: 8px 14px; border-radius: 999px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .sidebar-btn:hover { background: var(--purple-light); }
+
   .period-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 4px 0 18px;
+    margin: 16px 0 0;
     flex-wrap: wrap;
+    position: relative; z-index: 1;
   }
   .period-bar label {
     font-size: 12px;
     font-weight: 700;
-    color: var(--purple-dark);
+    color: rgba(255,255,255,0.85);
     text-transform: uppercase;
     letter-spacing: .03em;
   }
   select#periodSelect {
     padding: 9px 14px;
-    border: 1.5px solid var(--purple);
+    border: none;
     border-radius: 10px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--purple-dark);
     background: white;
     cursor: pointer;
     min-width: 240px;
   }
-  .period-hint { font-size: 12px; color: var(--muted); }
-  .stats-row { display: flex; gap: 12px; margin: 0 0 22px; flex-wrap: wrap; }
-  .stat-card { flex: 1; min-width: 140px; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
-  .stat-card .num { font-size: 26px; font-weight: 700; color: var(--purple); }
-  .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border); margin-bottom: 16px; flex-wrap: wrap; }
+  .period-hint { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  .tabs { display: flex; gap: 8px; margin: 22px 0 18px; flex-wrap: wrap; }
   .tab-btn {
-    background: none; border: none; font-size: 14px; font-weight: 600; color: var(--muted);
-    padding: 10px 16px; cursor: pointer; border-radius: 8px 8px 0 0; transition: all .15s;
+    background: white; border: 1.5px solid var(--border); font-size: 14px; font-weight: 700; color: var(--muted);
+    padding: 10px 18px; cursor: pointer; border-radius: 999px; transition: all .15s;
   }
-  .tab-btn.active { color: var(--purple-dark); background: var(--purple-light); }
+  .tab-btn.active { color: white; background: linear-gradient(135deg, var(--purple), var(--violet)); border-color: transparent; box-shadow: 0 6px 16px -6px rgba(130,10,209,.5); }
   .panel { display: none; }
-  .panel.active { display: block; }
+  .panel.active { display: block; animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
   .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
   input[type="search"] { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; min-width: 220px; background: white; }
-  .toggle-group { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .toggle-btn {
-    padding: 8px 14px;
-    border: 1.5px solid var(--purple);
-    border-radius: 999px;
-    background: white;
-    color: var(--purple-dark);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .toggle-btn.active { background: var(--purple); color: white; }
-  .section-title { font-size: 15px; font-weight: 700; color: var(--purple-dark); margin: 28px 0 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .section-title { font-size: 15px; font-weight: 800; color: var(--purple-dark); margin: 28px 0 12px; padding-top: 10px; border-top: 1px solid var(--border); }
   .section-title:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
   .podium { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
   .podium-card { flex: 1; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; position: relative; }
-  .podium-card.p1 { border-color: var(--gold); background: linear-gradient(180deg, #f3e6fc, #ffffff); order: 2; }
+  .podium-card.p1 { border-color: var(--gold); background: linear-gradient(180deg, #f3e6fc, #ffffff); order: 2; box-shadow: 0 8px 20px -10px rgba(130,10,209,.4); }
   .podium-card.p2 { border-color: var(--silver); order: 1; }
   .podium-card.p3 { border-color: var(--bronze); order: 3; }
   .medal { font-size: 28px; line-height: 1; }
@@ -129,6 +136,10 @@
   .podium-name { font-weight: 700; font-size: 13px; margin-top: 6px; word-break: break-word; }
   .podium-count { font-size: 20px; font-weight: 800; color: var(--purple); margin-top: 2px; }
   .podium-sub { font-size: 11px; color: var(--muted); }
+  .podium.flat .podium-card { order: initial; }
+  .podium-card.p4, .podium-card.p5 { border-color: var(--border); }
+  .medal.p4, .medal.p5 { color: var(--muted); font-size: 18px; }
+
   table.rank-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
   table.rank-table th, table.rank-table td { padding: 9px 12px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
   table.rank-table th { background: var(--purple-light); color: var(--purple-dark); font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
@@ -137,7 +148,7 @@
   .rank-num { font-weight: 700; color: var(--muted); width: 32px; }
   .bar-cell { width: 160px; }
   .bar-bg { background: var(--purple-light); border-radius: 6px; height: 8px; overflow: hidden; }
-  .bar-fill { background: var(--purple); height: 8px; border-radius: 6px; }
+  .bar-fill { background: linear-gradient(90deg, var(--purple), var(--violet)); height: 8px; border-radius: 6px; }
   .count-cell { font-weight: 700; color: var(--purple-dark); text-align: right; width: 60px; }
   .chart-box { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-top: 20px; }
   .chart-box h3 { margin: 0 0 12px; font-size: 14px; color: var(--purple-dark); }
@@ -177,13 +188,14 @@
   .insight-card.highlight .ic-title { color: var(--green); }
 
   .goal-cards { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
-  .goal-card { flex: 1; min-width: 200px; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+  .goal-card { flex: 1; min-width: 200px; background: white; border: 1px solid var(--border); border-top: 4px solid var(--goal-color, var(--purple)); border-radius: 14px; padding: 16px 18px; position: relative; }
   .goal-card.done { border-color: var(--green); background: var(--green-bg); }
+  .goal-icon { font-size: 18px; position: absolute; top: 14px; right: 16px; }
   .goal-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
   .goal-num { font-size: 28px; font-weight: 800; color: var(--purple-dark); margin-top: 4px; }
   .goal-num .goal-target { font-size: 15px; font-weight: 600; color: var(--muted); }
   .goal-progress-bg { background: var(--purple-light); border-radius: 6px; height: 8px; overflow: hidden; margin-top: 10px; }
-  .goal-progress-fill { background: var(--purple); height: 8px; border-radius: 6px; }
+  .goal-progress-fill { background: var(--goal-color, var(--purple)); height: 8px; border-radius: 6px; }
   .goal-card.done .goal-progress-fill { background: var(--green); }
   .goal-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
   .goal-card.done .goal-sub { color: var(--green); font-weight: 600; }
@@ -192,12 +204,7 @@
   .channel-summary { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
   .critical-note { background: var(--red-bg); color: #7a1f1f; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 14px; }
 
-  .podium.flat .podium-card { order: initial; }
-  .podium-card.p4, .podium-card.p5 { border-color: var(--border); }
-  .medal.p4, .medal.p5 { color: var(--muted); font-size: 18px; }
-
-  .sidebar-btn { background: white; border: 1.5px solid var(--purple); color: var(--purple-dark); font-weight: 600; font-size: 12.5px; padding: 7px 12px; border-radius: 999px; cursor: pointer; }
-  .sidebar-overlay { position: fixed; inset: 0; background: rgba(43,19,56,0.4); display: none; z-index: 40; }
+  .sidebar-overlay { position: fixed; inset: 0; background: rgba(43,19,56,0.45); display: none; z-index: 40; }
   .sidebar-overlay.open { display: block; }
   .sidebar-panel { position: fixed; top: 0; right: -340px; width: 320px; height: 100%; background: white; box-shadow: -4px 0 20px rgba(0,0,0,.15); z-index: 50; transition: right .25s; overflow-y: auto; padding: 18px; }
   .sidebar-panel.open { right: 0; }
@@ -210,24 +217,92 @@
   .sidebar-item:hover { background: var(--purple-light); }
   .sidebar-empty { font-size: 12px; color: var(--muted); }
 
-  .password-gate { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .password-gate { position: fixed; inset: 0; background: linear-gradient(135deg, var(--purple-dark), var(--purple) 60%, var(--violet)); display: flex; align-items: center; justify-content: center; z-index: 100; }
   .password-gate.hidden { display: none; }
-  .password-box { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; max-width: 320px; text-align: center; }
-  .password-title { font-size: 20px; font-weight: 800; color: var(--purple-dark); margin-bottom: 6px; }
+  .password-box { background: white; border-radius: 18px; padding: 34px 30px; max-width: 320px; text-align: center; box-shadow: 0 20px 50px -20px rgba(0,0,0,.5); }
+  .password-title { font-size: 21px; font-weight: 800; color: var(--purple-dark); margin-bottom: 6px; }
   .password-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
   .password-box input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; margin-bottom: 10px; box-sizing: border-box; }
-  .password-box button { width: 100%; padding: 10px; border: none; border-radius: 8px; background: var(--purple); color: white; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .password-box button { width: 100%; padding: 10px; border: none; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--violet)); color: white; font-weight: 700; font-size: 14px; cursor: pointer; }
   .password-error { color: var(--red); font-size: 12px; margin-top: 8px; }
+
+  /* welcome / opening modal */
+  .welcome-overlay { position: fixed; inset: 0; background: rgba(43,19,56,0.55); display: none; align-items: center; justify-content: center; z-index: 90; padding: 20px; }
+  .welcome-overlay.open { display: flex; }
+  .welcome-card { background: #fdfaff; border-radius: 20px; max-width: 480px; width: 100%; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(0,0,0,.4); }
+  .welcome-head { background: linear-gradient(135deg, var(--purple-dark), var(--purple) 55%, var(--pink)); color: white; padding: 22px 26px; position: relative; }
+  .welcome-head .wh-tag { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; opacity: .8; font-weight: 700; }
+  .welcome-head .wh-title { font-size: 22px; font-weight: 800; margin-top: 4px; }
+  .welcome-head .wh-sub { font-size: 13px; opacity: .9; margin-top: 6px; }
+  .welcome-close { position: absolute; top: 16px; right: 18px; background: rgba(255,255,255,.15); border: none; color: white; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 14px; }
+  .welcome-body { padding: 18px 26px; }
+  .welcome-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .welcome-item:last-child { border-bottom: none; }
+  .welcome-item .wi-icon { font-size: 20px; flex-shrink: 0; width: 28px; text-align: center; }
+  .welcome-item .wi-title { font-weight: 700; font-size: 13.5px; color: var(--purple-dark); }
+  .welcome-item .wi-desc { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+  .welcome-foot { padding: 14px 26px 22px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
+  .welcome-foot .wf-hint { font-size: 11.5px; color: var(--muted); flex: 1; }
+  .welcome-foot button { background: linear-gradient(135deg, var(--purple), var(--violet)); color: white; border: none; font-weight: 700; font-size: 13.5px; padding: 10px 20px; border-radius: 999px; cursor: pointer; }
 </style>
 </head>
 <body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
 <div class="password-gate" id="passwordGate">
   <div class="password-box">
-    <div class="password-title">WoW CSI 2026</div>
+    <div class="password-title">✨ WoW CSI 2026</div>
     <div class="password-sub">Conteúdo restrito ao time. Digite a senha para continuar.</div>
     <input type="password" id="passwordInput" placeholder="Senha">
     <button id="passwordSubmit">Entrar</button>
     <div class="password-error" id="passwordError" style="display:none;">Senha incorreta.</div>
+  </div>
+</div>
+
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-card">
+    <div class="welcome-head">
+      <button class="welcome-close" id="welcomeClose">✕</button>
+      <div class="wh-tag">WoW CSI · 2026</div>
+      <div class="wh-title">Spark the magic ✨</div>
+      <div class="wh-sub">um resumo rápido do que você encontra aqui.</div>
+    </div>
+    <div class="welcome-body">
+      <div class="welcome-item">
+        <div class="wi-icon">🎯</div>
+        <div>
+          <div class="wi-title">Metas do mês</div>
+          <div class="wi-desc">acompanhe WoWs, xmarts engajados e times participando em relação à meta.</div>
+        </div>
+      </div>
+      <div class="welcome-item">
+        <div class="wi-icon">🌡️</div>
+        <div>
+          <div class="wi-title">Termômetro de qualidade</div>
+          <div class="wi-desc">veja como as histórias estão sendo classificadas pela Faísca IA.</div>
+        </div>
+      </div>
+      <div class="welcome-item">
+        <div class="wi-icon">🏆</div>
+        <div>
+          <div class="wi-title">Ranking de Xmarts</div>
+          <div class="wi-desc">pódio top 5 e ranking completo, por período — atendimentos delicados ficam de fora.</div>
+        </div>
+      </div>
+      <div class="welcome-item">
+        <div class="wi-icon">🎥</div>
+        <div>
+          <div class="wi-title">Vídeos &amp; dicas</div>
+          <div class="wi-desc">abra o menu lateral pra ver os vídeos do Quarta WoW e dicas de conexão.</div>
+        </div>
+      </div>
+    </div>
+    <div class="welcome-foot">
+      <span class="wf-hint">pra ter conexão, tem que ter troca — não se esqueçam!</span>
+      <button id="welcomeGotIt">entendi, bora!</button>
+    </div>
   </div>
 </div>
 
@@ -248,29 +323,30 @@
 </div>
 
 <div class="wrap">
-  <header class="top">
-    <div>
-      <h1><img class="mascot-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABAAEADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFBgIBB//EADMQAAICAQIEBAUCBQUAAAAAAAECAwQRAAUSEyExIkFRYRQycZGhBrEjM0KBwXKCktHh/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQMEAAUC/8QAJBEBAAEEAQMEAwAAAAAAAAAAAQACAxEhEhMUMUFRcYEEQvD/2gAMAwEAAhEDEQA/ANgtOGfbx1CyjPX1+upVWQ1bJ6woVOCCTnGrBlSvtht8t5FAJIUdcazsc8e5TvaiVlVm7MOo1I6xKTyypO/E8kYrziGVeJZeUeDP17am1+GT5SucZ8XcjTcNjjVohYYqh4SvEcA+mkDAIrNc/EKohZuncyA+Xtp1FBXk9YQwR1rEFKrLYsyKkaY6jz9tR9y3+f4OnPQEcQnd1PxA7cIB0H9ROL6R1q0gkZWHFGvVupA7eeqNraFj2qvBLGnMVmcefA3TH2wNFKbYNcFWeOvMk19+3mV3XmUBwNw9R3+nXtpsbxvA7z7b/wAv/dTrMm7UxhjCyuxbMa+ZJJ/c6LVu7rfmU8EWAxUytEMLkHP4P51TxoxyMYiVQy5xPpu0xR2aCoyhkYN0I6EZ1EsbdHSvTRRKFTjyABgDVLYr6LKKWMSIhdgfJc99eX2SW3Iw7E65/IQY39mQEaOa1Ig8LK5Xr20ludilT5dm0xMcqlI0ROJmbixkn8Y+p09Mj1ppZIoJJGdz0H76j3fiLdJikrwNEzH+Dgj6HI79+3vptqqvbjxGjnAsmuIdttKWmy4bmJwoPU5yfPy+2qH6g3/mSpFXaWu9dwXDL0kBHQD11ka+51INxWS5Vs2Yk6+JwrSN7+3sNU953ld4spOIFi8IVVPXAHmdUBy3UTYM6jy3Xs040mIZgR4wfn6dT9+n9taWrWrCj8Srgxr2RfP66lbZd2m7SWpUpFOQvBxyqOJh6gj303caLboY4ubHE8gJ4CQMDXMu3Hr9MpdefuPu8O2B+ZRaOaO3FPDhTMCgJk4Q5AyBkDI7aFe3CxUuTQuQ8ikDJ9caS3XfpaVmtXgflmIcZyAQxOf8aJvlGzJuMlqJozE3Cw8fXOB5fXRUzqKLaYqfWdPuNiWtIk1cwyqMHhJBb6f21Nr7lJVXkJUjkikOHjfuc9CckHROTLKsl62hkkhyxJJySOw/bV7nVKyGSOlFKsqhgxY9iNUc3oIGczADuYfddojeWsZxxAOomKnBxn/rWg3fZtso7W81fb4uVEhdsd2Hl1PXUnfbSpCeWioSyr4SSSSffS+4bhI+2inGWdpfB83QDp0xptuhu0GdQOSrUeq7duSLBc2mCukb4cBj0I9CNMb3sty5blnrV4pGsIONp3/lnGML7e+hwxTwVIolkccCAYDaE1mdThpJAf8AUdMotcd0/wB8yS9+TzUZsIqccb8wojSduMg5A13NC8rZVgv+5tFJPqftrniYeuuW7lhmBlqyS13gZo+Fxg+Ek6xks257bukW0y8D15JAqyLk8oE48vLPrrZ2pJ+QRAQr+pOP8H9tZiTaLLW5Jmny0rhnLeIkjz6AD8adTUU0Iv1PRmT/ANR7HaprWnMyzAzcIRVIwcdyTp7ZNi59KK20qcw56EfKc6rTJJZheOxmRWHbA9c6BXW9zXBjSKL+kLwj8KNei4lGmarZhnlnZ7TrwxW44/U8JJ0AbDOVxLcRyPPgOqipJ/U5+2iqPUsdDuLnvJ+3t+0//9k=" alt="Faísca">WoW CSI 2026</h1>
-      <div class="subtitle">Aqui levamos o conceito de Spark The Magic na prática</div>
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <h1><img class="mascot-icon" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABAAEADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFBgIBB//EADMQAAICAQIEBAUCBQUAAAAAAAECAwQRAAUSEyExIkFRYRQycZGhBrEjM0KBwXKCktHh/8QAGQEAAwEBAQAAAAAAAAAAAAAAAQMEAAUC/8QAJBEBAAEEAQMEAwAAAAAAAAAAAQACAxEhEhMUMUFRcYEEQvD/2gAMAwEAAhEDEQA/ANgtOGfbx1CyjPX1+upVWQ1bJ6woVOCCTnGrBlSvtht8t5FAJIUdcazsc8e5TvaiVlVm7MOo1I6xKTyypO/E8kYrziGVeJZeUeDP17am1+GT5SucZ8XcjTcNjjVohYYqh4SvEcA+mkDAIrNc/EKohZuncyA+Xtp1FBXk9YQwR1rEFKrLYsyKkaY6jz9tR9y3+f4OnPQEcQnd1PxA7cIB0H9ROL6R1q0gkZWHFGvVupA7eeqNraFj2qvBLGnMVmcefA3TH2wNFKbYNcFWeOvMk19+3mV3XmUBwNw9R3+nXtpsbxvA7z7b/wAv/dTrMm7UxhjCyuxbMa+ZJJ/c6LVu7rfmU8EWAxUytEMLkHP4P51TxoxyMYiVQy5xPpu0xR2aCoyhkYN0I6EZ1EsbdHSvTRRKFTjyABgDVLYr6LKKWMSIhdgfJc99eX2SW3Iw7E65/IQY39mQEaOa1Ig8LK5Xr20ludilT5dm0xMcqlI0ROJmbixkn8Y+p09Mj1ppZIoJJGdz0H76j3fiLdJikrwNEzH+Dgj6HI79+3vptqqvbjxGjnAsmuIdttKWmy4bmJwoPU5yfPy+2qH6g3/mSpFXaWu9dwXDL0kBHQD11ka+51INxWS5Vs2Yk6+JwrSN7+3sNU953ld4spOIFi8IVVPXAHmdUBy3UTYM6jy3Xs040mIZgR4wfn6dT9+n9taWrWrCj8Srgxr2RfP66lbZd2m7SWpUpFOQvBxyqOJh6gj303caLboY4ubHE8gJ4CQMDXMu3Hr9MpdefuPu8O2B+ZRaOaO3FPDhTMCgJk4Q5AyBkDI7aFe3CxUuTQuQ8ikDJ9caS3XfpaVmtXgflmIcZyAQxOf8aJvlGzJuMlqJozE3Cw8fXOB5fXRUzqKLaYqfWdPuNiWtIk1cwyqMHhJBb6f21Nr7lJVXkJUjkikOHjfuc9CckHROTLKsl62hkkhyxJJySOw/bV7nVKyGSOlFKsqhgxY9iNUc3oIGczADuYfddojeWsZxxAOomKnBxn/rWg3fZtso7W81fb4uVEhdsd2Hl1PXUnfbSpCeWioSyr4SSSSffS+4bhI+2inGWdpfB83QDp0xptuhu0GdQOSrUeq7duSLBc2mCukb4cBj0I9CNMb3sty5blnrV4pGsIONp3/lnGML7e+hwxTwVIolkccCAYDaE1mdThpJAf8AUdMotcd0/wB8yS9+TzUZsIqccb8wojSduMg5A13NC8rZVgv+5tFJPqftrniYeuuW7lhmBlqyS13gZo+Fxg+Ek6xks257bukW0y8D15JAqyLk8oE48vLPrrZ2pJ+QRAQr+pOP8H9tZiTaLLW5Jmny0rhnLeIkjz6AD8adTUU0Iv1PRmT/ANR7HaprWnMyzAzcIRVIwcdyTp7ZNi59KK20qcw56EfKc6rTJJZheOxmRWHbA9c6BXW9zXBjSKL+kLwj8KNei4lGmarZhnlnZ7TrwxW44/U8JJ0AbDOVxLcRyPPgOqipJ/U5+2iqPUsdDuLnvJ+3t+0//9k=" alt="Faísca">WoW CSI 2026</h1>
+        <div class="subtitle">Aqui levamos o conceito de Spark The Magic na prática</div>
+      </div>
+      <div class="header-actions">
+        <span class="badge" id="lastUpdated"></span>
+        <button class="sidebar-btn" id="sidebarOpenBtn">☰ Vídeos &amp; Dicas</button>
+      </div>
     </div>
-    <div class="header-actions">
-      <span class="badge" id="lastUpdated"></span>
-      <button class="sidebar-btn" id="sidebarOpenBtn">☰ Vídeos &amp; Dicas</button>
+    <div class="period-bar">
+      <label for="periodSelect">Período:</label>
+      <select id="periodSelect"></select>
+      <span class="period-hint">já aberto no mês atual — escolha outro mês ou o semestre completo se quiser</span>
     </div>
-  </header>
-
-  <div class="period-bar">
-    <label for="periodSelect">Período:</label>
-    <select id="periodSelect"></select>
-    <span class="period-hint">já aberto no mês atual — escolha outro mês ou o semestre completo se quiser</span>
   </div>
 
   <div class="section-title" style="margin-top:0;padding-top:0;border-top:none;">Metas do mês — <span id="goalsMonthLabel"></span></div>
   <div class="goal-cards" id="goalCards"></div>
 
   <div class="tabs">
-    <button class="tab-btn active" data-tab="geral">Visão Geral</button>
-    <button class="tab-btn" data-tab="xmarts">Xmarts</button>
+    <button class="tab-btn active" data-tab="geral">📊 Visão Geral</button>
+    <button class="tab-btn" data-tab="xmarts">🏆 Xmarts</button>
   </div>
 
   <div class="panel active" id="panel-geral">
@@ -303,7 +379,7 @@
     <div class="chart-box"><h3>Top 10 Xmarts</h3><canvas id="chartXmarts"></canvas></div>
   </div>
 
-  <footer class="note" id="footerNote">Fonte: planilha "Base Faísca H22026" (aba "(Automatização) WoWs Faísca" + "Times e bandeiras"). Qualidade calculada a partir da coluna "Marcação Faísca (IA)". Atualizado automaticamente todas as manhãs.</footer>
+  <footer class="note" id="footerNote"></footer>
 </div>
 
 <script>
@@ -313,6 +389,11 @@ let MANIFEST = null;
 const periodCache = {};
 
 const GOALS = { wows: 120, xmarts: 200, teams: 28 };
+const GOAL_META = [
+  { icon: "🔥", color: "#820AD1" },
+  { icon: "🧑‍💻", color: "#ec4899" },
+  { icon: "🏁", color: "#f59e0b" },
+];
 const CHANNEL_LABELS = { phone: "Telefone", chat: "Chat", backoffice: "Backoffice", zendesk: "Zendesk", outros: "Outros" };
 const CHANNEL_COLORS = { phone: "#820AD1", chat: "#17a673", backoffice: "#d69e00", zendesk: "#2563eb", outros: "#9a8ba8" };
 
@@ -349,10 +430,20 @@ function initSidebar() {
   overlay.addEventListener("click", close);
 }
 
+function maybeShowWelcome() {
+  const overlay = document.getElementById("welcomeOverlay");
+  if (sessionStorage.getItem("wowCsiWelcomeSeen") === "1") return;
+  overlay.classList.add("open");
+  const close = () => { overlay.classList.remove("open"); sessionStorage.setItem("wowCsiWelcomeSeen", "1"); };
+  document.getElementById("welcomeClose").addEventListener("click", close);
+  document.getElementById("welcomeGotIt").addEventListener("click", close);
+}
+
 function initPasswordGate() {
   const gate = document.getElementById("passwordGate");
   if (sessionStorage.getItem("wowCsiAuth") === "1") {
     gate.classList.add("hidden");
+    maybeShowWelcome();
     return;
   }
   const input = document.getElementById("passwordInput");
@@ -362,6 +453,7 @@ function initPasswordGate() {
     if (hash === SITE_PASSWORD_HASH) {
       sessionStorage.setItem("wowCsiAuth", "1");
       gate.classList.add("hidden");
+      maybeShowWelcome();
     } else {
       error.style.display = "block";
     }
@@ -512,13 +604,15 @@ function renderGoals(monthPeriod, monthLabel) {
     { label: "Xmarts engajados", value: monthPeriod.total_xmarts, goal: GOALS.xmarts },
     { label: "Times participando", value: monthPeriod.total_teams, goal: GOALS.teams },
   ];
-  wrap.innerHTML = items.map(it => {
+  wrap.innerHTML = items.map((it, i) => {
     const pct = Math.min(100, Math.round((it.value / it.goal) * 100));
     const done = it.value >= it.goal;
     const diff = it.value - it.goal;
     const diffText = done ? `+${diff} acima da meta` : `faltam ${Math.abs(diff)} para a meta`;
+    const meta = GOAL_META[i] || GOAL_META[0];
     return `
-      <div class="goal-card ${done ? "done" : ""}">
+      <div class="goal-card ${done ? "done" : ""}" style="--goal-color:${meta.color}">
+        <div class="goal-icon">${meta.icon}</div>
         <div class="goal-label">${it.label}</div>
         <div class="goal-num">${it.value}<span class="goal-target"> / ${it.goal}</span></div>
         <div class="goal-progress-bg"><div class="goal-progress-fill" style="width:${pct}%"></div></div>
