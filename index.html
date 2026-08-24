@@ -25,6 +25,14 @@
     --gold: #820AD1;
     --silver: #a855f7;
     --bronze: #d8b4fe;
+    --green: #17a673;
+    --green-bg: #e6f7ef;
+    --yellow: #d69e00;
+    --yellow-bg: #fef6e0;
+    --red: #d93636;
+    --red-bg: #fdeaea;
+    --pending: #9a8ba8;
+    --pending-bg: #efeaf5;
   }
   * { box-sizing: border-box; }
   body {
@@ -136,6 +144,37 @@
   canvas { max-height: 320px; }
   .empty-msg { text-align: center; color: var(--muted); padding: 40px 0; font-size: 13px; }
   footer.note { text-align: center; color: var(--muted); font-size: 11px; margin-top: 26px; }
+
+  .quality-hero { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
+  .quality-hero .qh-title { font-size: 13px; font-weight: 700; color: var(--purple-dark); text-transform: uppercase; letter-spacing: .03em; margin-bottom: 12px; }
+  .quality-bar { display: flex; width: 100%; height: 26px; border-radius: 999px; overflow: hidden; background: var(--pending-bg); border: 1px solid var(--border); }
+  .quality-seg { height: 100%; transition: width .3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; overflow: hidden; white-space: nowrap; }
+  .quality-seg.green { background: var(--green); }
+  .quality-seg.yellow { background: var(--yellow); }
+  .quality-seg.red { background: var(--red); }
+  .quality-legend { display: flex; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
+  .quality-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text); }
+  .quality-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .quality-dot.green { background: var(--green); }
+  .quality-dot.yellow { background: var(--yellow); }
+  .quality-dot.red { background: var(--red); }
+  .quality-dot.pending { background: var(--pending); }
+  .quality-cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .quality-card { flex: 1; min-width: 150px; background: white; border: 1px solid var(--border); border-left: 4px solid var(--muted); border-radius: 12px; padding: 14px 16px; }
+  .quality-card.green { border-left-color: var(--green); }
+  .quality-card.yellow { border-left-color: var(--yellow); }
+  .quality-card.red { border-left-color: var(--red); }
+  .quality-card.pending { border-left-color: var(--pending); }
+  .quality-card .qc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .quality-card .qc-num { font-size: 24px; font-weight: 800; color: var(--text); margin-top: 4px; }
+  .quality-card .qc-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .quality-insights { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .insight-card { flex: 1; min-width: 220px; border-radius: 12px; padding: 14px 16px; font-size: 13px; line-height: 1.45; }
+  .insight-card .ic-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 6px; }
+  .insight-card.attention { background: var(--red-bg); color: #7a1f1f; }
+  .insight-card.attention .ic-title { color: var(--red); }
+  .insight-card.highlight { background: var(--green-bg); color: #114f39; }
+  .insight-card.highlight .ic-title { color: var(--green); }
 </style>
 </head>
 <body>
@@ -166,6 +205,7 @@
     <button class="tab-btn active" data-tab="times">Times</button>
     <button class="tab-btn" data-tab="xmarts">Xmarts</button>
     <button class="tab-btn" data-tab="lideres-times">Líderes e Times</button>
+    <button class="tab-btn" data-tab="qualidade">Qualidade</button>
   </div>
 
   <div class="panel active" id="panel-times">
@@ -212,7 +252,18 @@
     <div class="chart-box"><h3>Top 10 Times por WoWs</h3><canvas id="chartTimesClassic"></canvas></div>
   </div>
 
-  <footer class="note" id="footerNote">Fonte: planilha "Base Faísca H22026" (aba "(Automatização) WoWs Faísca" + "Times e bandeiras"). Atualizado automaticamente todas as manhãs.</footer>
+  <div class="panel" id="panel-qualidade">
+    <div class="quality-hero">
+      <div class="qh-title">Termômetro de qualidade das histórias</div>
+      <div class="quality-bar" id="qualityBar"></div>
+      <div class="quality-legend" id="qualityLegend"></div>
+    </div>
+    <div class="quality-cards" id="qualityCards"></div>
+    <div class="quality-insights" id="qualityInsights"></div>
+    <div class="chart-box"><h3>Distribuição de classificação (Faísca IA)</h3><canvas id="chartQuality"></canvas></div>
+  </div>
+
+  <footer class="note" id="footerNote">Fonte: planilha "Base Faísca H22026" (aba "(Automatização) WoWs Faísca" + "Times e bandeiras"). Qualidade calculada a partir da coluna "Marcação Faísca (IA)". Atualizado automaticamente todas as manhãs.</footer>
 </div>
 
 <script>
@@ -373,6 +424,70 @@ function renderTeamsClassicPanel(period) {
   };
 }
 
+function renderQualityPanel(period) {
+  const q = period.quality || { total: 0, green: 0, yellow: 0, red: 0, pending: 0, green_pct: 0, yellow_pct: 0, red_pct: 0, red_breakdown: { atencao: 0, atendimento_delicado: 0 } };
+  const classified = q.green + q.yellow + q.red;
+
+  const bar = document.getElementById("qualityBar");
+  bar.innerHTML = "";
+  if (classified === 0) {
+    bar.innerHTML = '<div class="quality-seg pending" style="width:100%;background:var(--pending);">Sem histórias classificadas ainda</div>';
+  } else {
+    const segs = [
+      { cls: "green", pct: q.green_pct, label: `${q.green_pct}%` },
+      { cls: "yellow", pct: q.yellow_pct, label: `${q.yellow_pct}%` },
+      { cls: "red", pct: q.red_pct, label: `${q.red_pct}%` },
+    ];
+    segs.forEach(s => {
+      if (s.pct <= 0) return;
+      const seg = document.createElement("div");
+      seg.className = "quality-seg " + s.cls;
+      seg.style.width = s.pct + "%";
+      seg.textContent = s.pct >= 8 ? s.label : "";
+      bar.appendChild(seg);
+    });
+  }
+
+  document.getElementById("qualityLegend").innerHTML = `
+    <div class="quality-legend-item"><span class="quality-dot green"></span>É WOW — ${q.green} (${q.green_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot yellow"></span>OK — ${q.yellow} (${q.yellow_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot red"></span>Precisa de atenção — ${q.red} (${q.red_pct}%)</div>
+    <div class="quality-legend-item"><span class="quality-dot pending"></span>Ainda não avaliado — ${q.pending}</div>
+  `;
+
+  document.getElementById("qualityCards").innerHTML = `
+    <div class="quality-card green"><div class="qc-label">É WOW</div><div class="qc-num">${q.green}</div><div class="qc-sub">${q.green_pct}% das histórias avaliadas</div></div>
+    <div class="quality-card yellow"><div class="qc-label">OK</div><div class="qc-num">${q.yellow}</div><div class="qc-sub">${q.yellow_pct}% das histórias avaliadas</div></div>
+    <div class="quality-card red"><div class="qc-label">Precisa de atenção</div><div class="qc-num">${q.red}</div><div class="qc-sub">${q.red_pct}% · ${q.red_breakdown.atencao} p/ melhorar info · ${q.red_breakdown.atendimento_delicado} contestação aberta</div></div>
+    <div class="quality-card pending"><div class="qc-label">Pendente</div><div class="qc-num">${q.pending}</div><div class="qc-sub">Ainda não avaliadas pela Faísca IA</div></div>
+  `;
+
+  const insights = document.getElementById("qualityInsights");
+  if (classified === 0) {
+    insights.innerHTML = "";
+  } else {
+    const attentionMsg = q.red > 0
+      ? `<b>${q.red}</b> história${q.red === 1 ? "" : "s"} (${q.red_pct}%) precisam de atenção neste período — ${q.red_breakdown.atendimento_delicado} com contestação aberta e ${q.red_breakdown.atencao} para melhorar a forma de contar a história.`
+      : `Nenhuma história marcada como "precisa de atenção" neste período.`;
+    const highlightMsg = `<b>${q.green_pct}%</b> das histórias avaliadas neste período foram classificadas como "É WOW" (${q.green} de ${classified} avaliadas)${q.pending ? `, com ${q.pending} ainda pendentes de avaliação` : ""}.`;
+    insights.innerHTML = `
+      <div class="insight-card attention"><div class="ic-title">Ponto de atenção</div>${attentionMsg}</div>
+      <div class="insight-card highlight"><div class="ic-title">Destaque do período</div>${highlightMsg}</div>
+    `;
+  }
+
+  if (charts["chartQuality"]) charts["chartQuality"].destroy();
+  const ctx = document.getElementById("chartQuality").getContext("2d");
+  charts["chartQuality"] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["É WOW", "OK", "Precisa de atenção", "Pendente"],
+      datasets: [{ data: [q.green, q.yellow, q.red, q.pending], backgroundColor: ["#17a673", "#d69e00", "#d93636", "#9a8ba8"], borderWidth: 0 }],
+    },
+    options: { plugins: { legend: { position: "bottom", labels: { font: { size: 12 } } } } },
+  });
+}
+
 function renderPeriod(period) {
   document.getElementById("statTotalWows").textContent = period.total_wows;
   document.getElementById("statTotalXmarts").textContent = period.total_xmarts;
@@ -386,6 +501,7 @@ function renderPeriod(period) {
   renderXmartsPanel(period);
   renderLideresPanel(period);
   renderTeamsClassicPanel(period);
+  renderQualityPanel(period);
 }
 
 document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(btn => {
