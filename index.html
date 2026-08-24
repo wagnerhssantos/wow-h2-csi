@@ -268,12 +268,6 @@
   <div class="section-title" style="margin-top:0;padding-top:0;border-top:none;">Metas do mês — <span id="goalsMonthLabel"></span></div>
   <div class="goal-cards" id="goalCards"></div>
 
-  <div class="stats-row">
-    <div class="stat-card"><div class="num" id="statTotalWows">-</div><div class="label">WoWs no período selecionado</div></div>
-    <div class="stat-card"><div class="num" id="statTotalXmarts">-</div><div class="label">Xmarts que submeteram</div></div>
-    <div class="stat-card"><div class="num" id="statTotalTimes">-</div><div class="label">Times participando</div></div>
-  </div>
-
   <div class="tabs">
     <button class="tab-btn active" data-tab="geral">Visão Geral</button>
     <button class="tab-btn" data-tab="xmarts">Xmarts</button>
@@ -288,20 +282,6 @@
     </div>
     <div class="quality-cards" id="qualityCards"></div>
     <div class="quality-insights" id="qualityInsights"></div>
-    <div class="chart-box"><h3>Distribuição de classificação (Faísca IA)</h3><canvas id="chartQuality"></canvas></div>
-
-    <div class="section-title">Engajamento por time</div>
-    <div class="toggle-group" id="teamsMetricToggle">
-      <button class="toggle-btn active" data-metric="xmarts">Mais pessoas engajadas</button>
-      <button class="toggle-btn" data-metric="count">Mais casos registrados</button>
-    </div>
-    <div class="toolbar"><input type="search" id="searchTimes" placeholder="Buscar time ou líder..."></div>
-    <div id="podiumTimes" class="podium"></div>
-    <table class="rank-table">
-      <thead><tr><th>#</th><th>Time</th><th>Líder (Xforce)</th><th>Xmarts ativos</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
-      <tbody id="tbodyTimes"></tbody>
-    </table>
-    <div class="chart-box"><h3 id="chartTimesTitle">Top 10 Times</h3><canvas id="chartTimes"></canvas></div>
 
     <div class="section-title">WoWs por time e canal de atendimento</div>
     <div class="channel-summary" id="channelSummary"></div>
@@ -329,7 +309,6 @@
 <script>
 
 let charts = {};
-let currentTeamsMetric = "xmarts";
 let MANIFEST = null;
 const periodCache = {};
 
@@ -447,37 +426,6 @@ function renderChart(canvasId, labels, data, color) {
       scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
     }
   });
-}
-
-function teamRowHtml(it, idx, max, metric) {
-  return `
-    <td class="rank-num">${idx + 1}</td>
-    <td>${it.name}</td>
-    <td>${it.leaderName}</td>
-    <td>${it.xmarts}</td>
-    <td class="bar-cell">${barCellHtml(it[metric], max)}</td>
-    <td class="count-cell">${it.count}</td>
-  `;
-}
-
-function renderTeamsPanel(period, metric) {
-  const sorted = [...period.teams].filter(t => t.name !== "-").sort((a, b) => b[metric] - a[metric] || a.name.localeCompare(b.name));
-  const max = sorted.length ? sorted[0][metric] : 0;
-  const unitLabel = metric === "xmarts" ? "pessoas engajadas" : "casos registrados";
-  const titleEl = document.getElementById("chartTimesTitle");
-  if (titleEl) titleEl.textContent = metric === "xmarts" ? "Top 10 Times · Pessoas engajadas" : "Top 10 Times · Casos registrados";
-
-  renderPodium("podiumTimes", sorted, metric, unitLabel, it => `Líder: ${it.leaderName}`, 3);
-  renderTable("tbodyTimes", sorted, (it, idx) => teamRowHtml(it, idx, max, metric), 6);
-  renderChart("chartTimes", sorted.slice(0, 10).map(it => it.name), sorted.slice(0, 10).map(it => it[metric]), "#820AD1");
-
-  const searchEl = document.getElementById("searchTimes");
-  searchEl.value = "";
-  searchEl.oninput = (e) => {
-    const q = e.target.value.trim().toLowerCase();
-    const filtered = q ? sorted.filter(it => (it.name + " " + it.leaderName).toLowerCase().includes(q)) : sorted;
-    renderTable("tbodyTimes", filtered, (it) => teamRowHtml(it, sorted.indexOf(it), max, metric), 6);
-  };
 }
 
 function renderXmartsPanel(period) {
@@ -630,41 +578,15 @@ function renderQualityPanel(period) {
       <div class="insight-card highlight"><div class="ic-title">Destaque do período</div>${highlightMsg}</div>
     `;
   }
-
-  if (charts["chartQuality"]) charts["chartQuality"].destroy();
-  const ctx = document.getElementById("chartQuality").getContext("2d");
-  charts["chartQuality"] = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: ["É WOW", "OK", "Precisa de atenção", "Pendente"],
-      datasets: [{ data: [q.green, q.yellow, q.red, q.pending], backgroundColor: ["#17a673", "#d69e00", "#d93636", "#9a8ba8"], borderWidth: 0 }],
-    },
-    options: { plugins: { legend: { position: "bottom", labels: { font: { size: 12 } } } } },
-  });
 }
 
 function renderPeriod(period) {
-  document.getElementById("statTotalWows").textContent = period.total_wows;
-  document.getElementById("statTotalXmarts").textContent = period.total_xmarts;
-  document.getElementById("statTotalTimes").textContent = period.total_teams;
-
   window.__currentPeriod = period;
-  currentTeamsMetric = "xmarts";
-  document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(b => b.classList.toggle("active", b.dataset.metric === currentTeamsMetric));
 
   renderQualityPanel(period);
-  renderTeamsPanel(period, currentTeamsMetric);
   renderChannelsPanel(period);
   renderXmartsPanel(period);
 }
-
-document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    currentTeamsMetric = btn.dataset.metric;
-    document.querySelectorAll("#teamsMetricToggle .toggle-btn").forEach(b => b.classList.toggle("active", b === btn));
-    if (window.__currentPeriod) renderTeamsPanel(window.__currentPeriod, currentTeamsMetric);
-  });
-});
 
 async function loadPeriod(key) {
   if (periodCache[key]) return periodCache[key];
