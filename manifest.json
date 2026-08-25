@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-24T17:44:57-03:00",
-  "semester_label": "Semestre completo (2º semestre de 2026)",
+  "generated_at": "2026-08-25T12:00:00",
+  "semester_label": "2º semestre de 2026",
   "periods": [
     {
       "key": "semester",
-      "label": "Semestre completo (2º semestre de 2026)",
-      "total_wows": 544,
-      "total_xmarts": 163,
+      "label": "2º semestre de 2026",
+      "total_wows": 550,
+      "total_xmarts": 164,
       "total_teams": 28
     },
     {
@@ -19,8 +19,8 @@
     {
       "key": "2026-08",
       "label": "Agosto 2026",
-      "total_wows": 261,
-      "total_xmarts": 117,
+      "total_wows": 267,
+      "total_xmarts": 118,
       "total_teams": 28
     }
   ]
