@@ -204,6 +204,43 @@
   .channel-summary { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
   .critical-note { background: var(--red-bg); color: #7a1f1f; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 14px; }
 
+  /* ---- termometro por time / xmart (tooltip no hover) ---- */
+  .thermo-hint { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .thermo-hint b { color: var(--purple-dark); font-weight: 700; }
+  tr.has-thermo { cursor: help; }
+  .podium-card.has-thermo { cursor: help; }
+  .thermo-tip {
+    position: fixed; z-index: 70; pointer-events: none; opacity: 0; transform: translateY(4px);
+    transition: opacity .12s ease, transform .12s ease;
+    background: white; border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: 0 18px 40px -14px rgba(43,19,56,.45);
+    padding: 14px 16px; width: 290px; left: 0; top: 0;
+  }
+  .thermo-tip.open { opacity: 1; transform: translateY(0); }
+  .thermo-tip .tt-name { font-size: 13.5px; font-weight: 800; color: var(--purple-dark); line-height: 1.25; }
+  .thermo-tip .tt-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .thermo-tip .tt-barlabel { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 12px 0 5px; }
+  .thermo-tip .tt-bar { display: flex; width: 100%; height: 20px; border-radius: 999px; overflow: hidden; background: var(--pending-bg); border: 1px solid var(--border); }
+  .thermo-tip .tt-seg { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+  .thermo-tip .tt-seg.green { background: var(--green); }
+  .thermo-tip .tt-seg.yellow { background: var(--yellow); }
+  .thermo-tip .tt-seg.red { background: var(--red); }
+  .thermo-tip .tt-seg.none { background: var(--pending-bg); color: var(--muted); width: 100%; font-weight: 600; }
+  .thermo-tip .tt-rows { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+  .thermo-tip .tt-row { display: flex; align-items: baseline; gap: 7px; font-size: 12px; }
+  .thermo-tip .tt-row .tt-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; transform: translateY(1px); }
+  .thermo-tip .tt-row .tt-dot.green { background: var(--green); }
+  .thermo-tip .tt-row .tt-dot.yellow { background: var(--yellow); }
+  .thermo-tip .tt-row .tt-dot.red { background: var(--red); }
+  .thermo-tip .tt-row .tt-dot.pending { background: var(--pending); }
+  .thermo-tip .tt-row .tt-lbl { flex: 1; color: var(--text); }
+  .thermo-tip .tt-row .tt-val { font-weight: 700; color: var(--text); }
+  .thermo-tip .tt-row .tt-pct { color: var(--muted); font-size: 11px; }
+  .thermo-tip .tt-detail { font-size: 11px; color: var(--muted); margin-top: 7px; line-height: 1.4; padding-left: 16px; }
+  .thermo-tip .tt-flag { margin-top: 10px; background: var(--red-bg); color: #7a1f1f; border-radius: 8px; padding: 7px 10px; font-size: 11px; line-height: 1.35; }
+  .thermo-tip .tt-score { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); }
+  .thermo-tip .tt-score b { color: var(--purple-dark); font-size: 13px; }
+
   .sidebar-overlay { position: fixed; inset: 0; background: rgba(43,19,56,0.45); display: none; z-index: 40; }
   .sidebar-overlay.open { display: block; }
   .sidebar-panel { position: fixed; top: 0; right: -340px; width: 320px; height: 100%; background: white; box-shadow: -4px 0 20px rgba(0,0,0,.15); z-index: 50; transition: right .25s; overflow-y: auto; padding: 18px; }
@@ -251,6 +288,8 @@
 <div class="blob b2"></div>
 <div class="blob b3"></div>
 
+<div class="thermo-tip" id="thermoTip"></div>
+
 <div class="password-gate" id="passwordGate">
   <div class="password-box">
     <div class="password-title">✨ WoW CSI 2026</div>
@@ -281,7 +320,7 @@
         <div class="wi-icon">🌡️</div>
         <div>
           <div class="wi-title">Termômetro de qualidade</div>
-          <div class="wi-desc">veja como as histórias estão sendo classificadas pela Faísca IA.</div>
+          <div class="wi-desc">veja como as histórias estão sendo classificadas pela Faísca IA — e passe o mouse em qualquer time ou Xmart para ver o termômetro individual dele.</div>
         </div>
       </div>
       <div class="welcome-item">
@@ -360,6 +399,7 @@
     <div class="quality-insights" id="qualityInsights"></div>
 
     <div class="section-title">WoWs por time e canal de atendimento</div>
+    <div class="thermo-hint">🌡️ <span><b>passe o mouse</b> (ou toque, no celular) em qualquer linha para ver o termômetro de qualidade daquele time.</span></div>
     <div class="channel-summary" id="channelSummary"></div>
     <table class="rank-table">
       <thead id="channelsThead"></thead>
@@ -371,6 +411,7 @@
   <div class="panel" id="panel-xmarts">
     <div class="toolbar"><input type="search" id="searchXmarts" placeholder="Buscar por nome, time ou liderança..."></div>
     <div class="critical-note" id="criticalNote" style="display:none;"></div>
+    <div class="thermo-hint">🌡️ <span><b>passe o mouse</b> (ou toque, no celular) em um Xmart do pódio ou da tabela para ver o termômetro de qualidade das histórias dele.</span></div>
     <div id="podiumXmarts" class="podium"></div>
     <table class="rank-table">
       <thead><tr><th>#</th><th>Xmart</th><th>Time</th><th>Liderança</th><th class="bar-cell"></th><th>WoWs</th></tr></thead>
@@ -430,6 +471,114 @@ function initSidebar() {
   overlay.addEventListener("click", close);
 }
 
+/* ------------------ termometro por time / xmart ------------------ */
+
+function escapeHtml(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// q = [green, yellow, red, pending, atencao, delicado]
+function thermoHtml(title, sub, q, opts) {
+  opts = opts || {};
+  const g = q[0] || 0, y = q[1] || 0, r = q[2] || 0, p = q[3] || 0;
+  const at = q[4] || 0, de = q[5] || 0;
+  const classified = g + y + r;
+  const total = classified + p;
+  const pct = v => classified ? Math.round((v / classified) * 1000) / 10 : 0;
+  const gp = pct(g), yp = pct(y), rp = pct(r);
+
+  let bar;
+  if (!classified) {
+    bar = '<div class="tt-seg none">sem histórias avaliadas ainda</div>';
+  } else {
+    bar = [
+      g ? `<div class="tt-seg green" style="width:${gp}%">${gp >= 14 ? gp + "%" : ""}</div>` : "",
+      y ? `<div class="tt-seg yellow" style="width:${yp}%">${yp >= 14 ? yp + "%" : ""}</div>` : "",
+      r ? `<div class="tt-seg red" style="width:${rp}%">${rp >= 14 ? rp + "%" : ""}</div>` : "",
+    ].join("");
+  }
+
+  const row = (cls, label, val, pctVal) =>
+    `<div class="tt-row"><span class="tt-dot ${cls}"></span><span class="tt-lbl">${label}</span><span class="tt-val">${val}</span>${pctVal !== null ? `<span class="tt-pct">${pctVal}%</span>` : ""}</div>`;
+
+  let rows = row("green", "É WOW", g, classified ? gp : null)
+           + row("yellow", "OK", y, classified ? yp : null)
+           + row("red", "Precisa de atenção", r, classified ? rp : null);
+  if (p > 0) rows += row("pending", p === 1 ? "Ainda não avaliada" : "Ainda não avaliadas", p, null);
+
+  const detail = r > 0
+    ? `<div class="tt-detail">${at} para melhorar a forma de dar informações · ${de} com contestação aberta</div>`
+    : "";
+
+  const flag = opts.critical
+    ? `<div class="tt-flag">⚠️ fora do ranking do período: teve ${de} atendimento${de === 1 ? "" : "s"} delicado${de === 1 ? "" : "s"} (contestação aberta).</div>`
+    : "";
+
+  const score = classified
+    ? `<div class="tt-score"><b>${gp}%</b> ${classified === 1 ? "da única história avaliada é" : `das ${classified} histórias avaliadas são`} "É WOW"</div>`
+    : "";
+
+  return `
+    <div class="tt-name">${escapeHtml(title)}</div>
+    <div class="tt-sub">${escapeHtml(sub)}</div>
+    <div class="tt-barlabel">Termômetro · ${total} WoW${total === 1 ? "" : "s"} no período</div>
+    <div class="tt-bar">${bar}</div>
+    <div class="tt-rows">${rows}</div>
+    ${detail}
+    ${flag}
+    ${score}
+  `;
+}
+
+function positionThermo(e) {
+  const tip = document.getElementById("thermoTip");
+  const pad = 12;
+  const w = tip.offsetWidth || 290;
+  const h = tip.offsetHeight || 220;
+  let x = e.clientX + 18;
+  let y = e.clientY + 18;
+  if (x + w > window.innerWidth - pad) x = e.clientX - w - 18;
+  if (y + h > window.innerHeight - pad) y = e.clientY - h - 18;
+  if (x < pad) x = pad;
+  if (y < pad) y = pad;
+  tip.style.left = x + "px";
+  tip.style.top = y + "px";
+}
+
+function hideThermo() {
+  document.getElementById("thermoTip").classList.remove("open");
+}
+
+function bindThermo(el, html) {
+  if (!el) return;
+  el.classList.add("has-thermo");
+  const tip = document.getElementById("thermoTip");
+  const show = (e) => { tip.innerHTML = html; tip.classList.add("open"); positionThermo(e); };
+  el.addEventListener("mouseenter", show);
+  el.addEventListener("mousemove", positionThermo);
+  el.addEventListener("mouseleave", hideThermo);
+  el.addEventListener("click", (e) => { e.stopPropagation(); show(e); });
+}
+
+function attachThermoToRows(tbodyId, items, titleFn, subFn, optsFn) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  rows.forEach((tr, i) => {
+    const item = items[i];
+    if (!item || !item.q) return;
+    bindThermo(tr, thermoHtml(titleFn(item), subFn(item), item.q, optsFn ? optsFn(item) : {}));
+  });
+}
+
+function initThermoGlobal() {
+  document.addEventListener("click", hideThermo);
+  window.addEventListener("scroll", hideThermo, { passive: true });
+  window.addEventListener("resize", hideThermo);
+}
+
+/* ---------------------------------------------------------------- */
+
 function maybeShowWelcome() {
   const overlay = document.getElementById("welcomeOverlay");
   if (sessionStorage.getItem("wowCsiWelcomeSeen") === "1") return;
@@ -462,7 +611,7 @@ function initPasswordGate() {
   input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
 }
 
-function renderPodium(containerId, items, valueKey, unitLabel, subFn, topN) {
+function renderPodium(containerId, items, valueKey, unitLabel, subFn, topN, thermoSubFn) {
   topN = topN || 3;
   const el = document.getElementById(containerId);
   el.innerHTML = "";
@@ -482,6 +631,9 @@ function renderPodium(containerId, items, valueKey, unitLabel, subFn, topN) {
       <div class="podium-sub">${unitLabel}${subFn ? " · " + subFn(item) : ""}</div>
     `;
     el.appendChild(card);
+    if (item.q) {
+      bindThermo(card, thermoHtml(item.name, thermoSubFn ? thermoSubFn(item) : "", item.q, { critical: !!item.critical }));
+    }
   });
 }
 
@@ -520,6 +672,13 @@ function renderChart(canvasId, labels, data, color) {
   });
 }
 
+function xmartThermoSub(it) {
+  const parts = [];
+  if (it.team && it.team !== "-") parts.push(it.team);
+  if (it.leaderName && it.leaderName !== "-") parts.push("Xforce: " + it.leaderName);
+  return parts.join(" · ");
+}
+
 function renderXmartsPanel(period) {
   const fullList = period.xmarts;
   const excluded = fullList.filter(x => x.critical).length;
@@ -542,8 +701,9 @@ function renderXmartsPanel(period) {
     noteEl.style.display = "none";
   }
 
-  renderPodium("podiumXmarts", xmartList, "count", "WoWs", it => it.team !== "-" ? it.team : "", 5);
+  renderPodium("podiumXmarts", xmartList, "count", "WoWs", it => it.team !== "-" ? it.team : "", 5, xmartThermoSub);
   renderTable("tbodyXmarts", xmartList, xmartRow, 6);
+  attachThermoToRows("tbodyXmarts", xmartList, it => it.name, xmartThermoSub, it => ({ critical: !!it.critical }));
   renderChart("chartXmarts", xmartList.slice(0, 10).map(it => it.name), xmartList.slice(0, 10).map(it => it.count), "#820AD1");
 
   const searchEl = document.getElementById("searchXmarts");
@@ -552,6 +712,7 @@ function renderXmartsPanel(period) {
     const q = e.target.value.trim().toLowerCase();
     const filtered = q ? xmartList.filter(it => (it.name + " " + it.team + " " + (it.leaderName || "") + " " + it.email).toLowerCase().includes(q)) : xmartList;
     renderTable("tbodyXmarts", filtered, (it) => xmartRow(it, xmartList.indexOf(it)), 6);
+    attachThermoToRows("tbodyXmarts", filtered, it => it.name, xmartThermoSub, it => ({ critical: !!it.critical }));
   };
 }
 
@@ -565,6 +726,9 @@ function renderChannelsPanel(period) {
   document.getElementById("channelsThead").innerHTML = `<tr><th>Time</th>${channelKeys.map(k => `<th>${CHANNEL_LABELS[k] || k}</th>`).join("")}<th>Total</th></tr>`;
   const rows = teams.map(t => `<tr><td>${t.name}</td>${channelKeys.map(k => `<td>${(t.channels && t.channels[k]) || 0}</td>`).join("")}<td class="count-cell">${t.count}</td></tr>`).join("");
   document.getElementById("channelsTbody").innerHTML = rows || `<tr><td colspan="${channelKeys.length + 2}" class="empty-msg">Sem dados neste período.</td></tr>`;
+  if (rows) {
+    attachThermoToRows("channelsTbody", teams, t => t.name, t => (t.leaderName && t.leaderName !== "-" ? "Xforce: " + t.leaderName : "") + (t.xmarts ? ` · ${t.xmarts} xmart${t.xmarts === 1 ? "" : "s"} engajado${t.xmarts === 1 ? "" : "s"}` : ""));
+  }
 
   const co = period.channels_overall || {};
   document.getElementById("channelSummary").textContent = channelKeys.length
@@ -676,6 +840,7 @@ function renderQualityPanel(period) {
 
 function renderPeriod(period) {
   window.__currentPeriod = period;
+  hideThermo();
 
   renderQualityPanel(period);
   renderChannelsPanel(period);
@@ -693,6 +858,7 @@ async function loadPeriod(key) {
 async function main() {
   initPasswordGate();
   initSidebar();
+  initThermoGlobal();
 
   const res = await fetch("manifest.json");
   MANIFEST = await res.json();
@@ -741,6 +907,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
     document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
     btn.classList.add("active");
     document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+    hideThermo();
   });
 });
 
