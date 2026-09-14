@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-09-13T12:42:23",
+ "generated_at": "2026-09-14T07:15:30",
  "semester_label": "2º semestre de 2026",
  "periods": [
   {
    "key": "semester",
    "label": "2º semestre de 2026",
-   "total_wows": 738,
-   "total_xmarts": 190,
+   "total_wows": 744,
+   "total_xmarts": 192,
    "total_teams": 28
   },
   {
@@ -26,8 +26,8 @@
   {
    "key": "2026-09",
    "label": "Setembro 2026",
-   "total_wows": 110,
-   "total_xmarts": 65,
+   "total_wows": 116,
+   "total_xmarts": 67,
    "total_teams": 23
   }
  ]
