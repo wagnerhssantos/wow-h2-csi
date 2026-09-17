@@ -9,7 +9,15 @@
    "leaderEmail": "mayara.iacometti@nubank.com.br",
    "leaderName": "Mayara Iacometti",
    "count": 15,
-   "critical": true
+   "critical": true,
+   "q": [
+    1,
+    1,
+    13,
+    0,
+    12,
+    1
+   ]
   },
   {
    "email": "carla.andrade@nubank.com.br",
@@ -18,7 +26,15 @@
    "leaderEmail": "julia.guenka@nubank.com.br",
    "leaderName": "Julia Guenka",
    "count": 13,
-   "critical": false
+   "critical": false,
+   "q": [
+    10,
+    3,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "daniel.martins2@nubank.com.br",
@@ -27,7 +43,15 @@
    "leaderEmail": "naiara.franca@nubank.com.br",
    "leaderName": "Naiara Franca",
    "count": 13,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    6,
+    5,
+    0,
+    5,
+    0
+   ]
   },
   {
    "email": "ruan.matos@nubank.com.br",
@@ -36,7 +60,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 11,
-   "critical": false
+   "critical": false,
+   "q": [
+    5,
+    5,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "simone.paula@nubank.com.br",
@@ -45,7 +77,15 @@
    "leaderEmail": "helen.silva@nubank.com.br",
    "leaderName": "Helen Silva",
    "count": 10,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    4,
+    3,
+    0,
+    3,
+    0
+   ]
   },
   {
    "email": "raquel.silva@nubank.com.br",
@@ -54,7 +94,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 8,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    6,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "caio.marquez@nubank.com.br",
@@ -63,7 +111,15 @@
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
    "count": 7,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    4,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "felipe.roque@nubank.com.br",
@@ -72,7 +128,15 @@
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "count": 7,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    2,
+    3,
+    0,
+    3,
+    0
+   ]
   },
   {
    "email": "tatiane.oliveira2@nubank.com.br",
@@ -81,7 +145,15 @@
    "leaderEmail": "weslley.miranda@nubank.com.br",
    "leaderName": "Weslley Miranda",
    "count": 7,
-   "critical": false
+   "critical": false,
+   "q": [
+    4,
+    2,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "fernando.petronilho@nubank.com.br",
@@ -90,7 +162,15 @@
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
    "count": 6,
-   "critical": false
+   "critical": false,
+   "q": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "gabrielli.misael@nubank.com.br",
@@ -99,7 +179,15 @@
    "leaderEmail": "weslley.miranda@nubank.com.br",
    "leaderName": "Weslley Miranda",
    "count": 6,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    3,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "luis.redondo@nubank.com.br",
@@ -108,7 +196,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 6,
-   "critical": false
+   "critical": false,
+   "q": [
+    4,
+    0,
+    2,
+    0,
+    2,
+    0
+   ]
   },
   {
    "email": "alexandre.ken@nubank.com.br",
@@ -117,7 +213,15 @@
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
    "count": 5,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    3,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "marcelo.calixto@nubank.com.br",
@@ -126,7 +230,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 5,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "regina.chagas@nubank.com.br",
@@ -135,7 +247,15 @@
    "leaderEmail": "helen.silva@nubank.com.br",
    "leaderName": "Helen Silva",
    "count": 5,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "adriana.vargas@nubank.com.br",
@@ -144,7 +264,15 @@
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    4,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "eduardo.andrade@nubank.com.br",
@@ -153,7 +281,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    2,
+    0,
+    2,
+    0
+   ]
   },
   {
    "email": "karine.punhagui@nubank.com.br",
@@ -162,7 +298,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    3,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "kelly.caxico@nubank.com.br",
@@ -171,7 +315,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "sam.torelli@nubank.com.br",
@@ -180,7 +332,15 @@
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "stephanie.santos@nubank.com.br",
@@ -189,7 +349,15 @@
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "vanessa.folger@nubank.com.br",
@@ -198,7 +366,15 @@
    "leaderEmail": "adriana.falcao@nubank.com.br",
    "leaderName": "Adriana Falcao",
    "count": 4,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "alexandre.surmonte@nubank.com.br",
@@ -207,7 +383,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "ana.viana@nubank.com.br",
@@ -216,7 +400,15 @@
    "leaderEmail": "gabriel.resende@nubank.com.br",
    "leaderName": "Gabriel Resende",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "danielle.villasanti@nubank.com.br",
@@ -225,7 +417,15 @@
    "leaderEmail": "camilla.marques@nubank.com.br",
    "leaderName": "Camilla Marques",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    2,
+    0,
+    2,
+    0
+   ]
   },
   {
    "email": "kissila.oliveira@nubank.com.br",
@@ -234,7 +434,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "leonardo.soares@nubank.com.br",
@@ -243,7 +451,15 @@
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "maycon.cardoso@nubank.com.br",
@@ -252,7 +468,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "priscila.hora@nubank.com.br",
@@ -261,7 +485,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    2,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "rita.dantas@nubank.com.br",
@@ -270,7 +502,15 @@
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "count": 3,
-   "critical": false
+   "critical": false,
+   "q": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "adriana.beserra@nubank.com.br",
@@ -279,7 +519,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "adriellen.sales@nubank.com.br",
@@ -288,7 +536,15 @@
    "leaderEmail": "fabiana.fink@nubank.com.br",
    "leaderName": "Fabiana Fink",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "andressa.gomes@nubank.com.br",
@@ -297,7 +553,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "angelica.almeida@nubank.com.br",
@@ -306,7 +570,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "beatriz.aparecida@nubank.com.br",
@@ -315,7 +587,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "carolina.barbosa2@nubank.com.br",
@@ -324,7 +604,15 @@
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "daniela.albuquerque@nubank.com.br",
@@ -333,7 +621,15 @@
    "leaderEmail": "julia.guenka@nubank.com.br",
    "leaderName": "Julia Guenka",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "dayse.santos@nubank.com.br",
@@ -342,7 +638,15 @@
    "leaderEmail": "vinicius.bigon@nubank.com.br",
    "leaderName": "Vinicius Bigon",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "felipe.souza2@nubank.com.br",
@@ -351,7 +655,15 @@
    "leaderEmail": "fabiana.fink@nubank.com.br",
    "leaderName": "Fabiana Fink",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "fernanda.lacerda@nubank.com.br",
@@ -360,7 +672,15 @@
    "leaderEmail": "fabiana.fink@nubank.com.br",
    "leaderName": "Fabiana Fink",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "isabelle.rossi@nubank.com.br",
@@ -369,7 +689,15 @@
    "leaderEmail": "naiara.franca@nubank.com.br",
    "leaderName": "Naiara Franca",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "jessica.torres@nubank.com.br",
@@ -378,7 +706,15 @@
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "josielison.pereira@nubank.com.br",
@@ -387,7 +723,15 @@
    "leaderEmail": "bruna.matos@nubank.com.br",
    "leaderName": "Bruna Matos",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "juliana.gurgueira@nubank.com.br",
@@ -396,7 +740,15 @@
    "leaderEmail": "helen.silva@nubank.com.br",
    "leaderName": "Helen Silva",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "leticia.yris@nubank.com.br",
@@ -405,7 +757,15 @@
    "leaderEmail": "gabriela.eira@nubank.com.br",
    "leaderName": "Gabriela Eira",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "lincoln.vieira@nubank.com.br",
@@ -414,7 +774,15 @@
    "leaderEmail": "weslley.miranda@nubank.com.br",
    "leaderName": "Weslley Miranda",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "maria.ferreira@nubank.com.br",
@@ -423,7 +791,15 @@
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "marina.jorge@nubank.com.br",
@@ -432,7 +808,15 @@
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "natalia.oliveira2@nubank.com.br",
@@ -441,7 +825,15 @@
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "paloma.farias@nubank.com.br",
@@ -450,7 +842,15 @@
    "leaderEmail": "naiara.franca@nubank.com.br",
    "leaderName": "Naiara Franca",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "renata.souza@nubank.com.br",
@@ -459,7 +859,15 @@
    "leaderEmail": "lazara.paulino@nubank.com.br",
    "leaderName": "Lazara Paulino",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "stefany.marques@nubank.com.br",
@@ -468,7 +876,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "talita.patriarchi@nubank.com.br",
@@ -477,7 +893,15 @@
    "leaderEmail": "raphael.mourao@nubank.com.br",
    "leaderName": "Raphael Mourao",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    2,
+    0,
+    2,
+    0
+   ]
   },
   {
    "email": "thalita.gomes@nubank.com.br",
@@ -486,7 +910,15 @@
    "leaderEmail": "mayara.iacometti@nubank.com.br",
    "leaderName": "Mayara Iacometti",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "thays.alencar@nubank.com.br",
@@ -495,7 +927,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "yara.pinheiro@nubank.com.br",
@@ -504,7 +944,15 @@
    "leaderEmail": "gabriela.eira@nubank.com.br",
    "leaderName": "Gabriela Eira",
    "count": 2,
-   "critical": false
+   "critical": false,
+   "q": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "adriana.faria@nubank.com.br",
@@ -513,7 +961,15 @@
    "leaderEmail": "bruna.matos@nubank.com.br",
    "leaderName": "Bruna Matos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "alyne.souza@nubank.com.br",
@@ -522,7 +978,15 @@
    "leaderEmail": "adriana.falcao@nubank.com.br",
    "leaderName": "Adriana Falcao",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "amanda.belarmino@nubank.com.br",
@@ -531,7 +995,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "ana.brito@nubank.com.br",
@@ -540,7 +1012,15 @@
    "leaderEmail": "mayara.iacometti@nubank.com.br",
    "leaderName": "Mayara Iacometti",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "anderson.hoepers@nubank.com.br",
@@ -549,7 +1029,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "athus.buso@nubank.com.br",
@@ -558,7 +1046,15 @@
    "leaderEmail": "weslley.miranda@nubank.com.br",
    "leaderName": "Weslley Miranda",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "bianca.santos@nubank.com.br",
@@ -567,7 +1063,15 @@
    "leaderEmail": "gabriel.resende@nubank.com.br",
    "leaderName": "Gabriel Resende",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "brida.eto@nubank.com.br",
@@ -576,7 +1080,15 @@
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "bruna.rodrigues2@nubank.com.br",
@@ -585,7 +1097,15 @@
    "leaderEmail": "naiara.franca@nubank.com.br",
    "leaderName": "Naiara Franca",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "bruna.werneck@nubank.com.br",
@@ -594,7 +1114,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "brune.nomura@nubank.com.br",
@@ -603,7 +1131,15 @@
    "leaderEmail": "enzo.berardo@nubank.com.br",
    "leaderName": "Enzo Berardo",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "caique.keller@nubank.com.br",
@@ -612,7 +1148,15 @@
    "leaderEmail": "raphael.mourao@nubank.com.br",
    "leaderName": "Raphael Mourao",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "caroline.alves2@nubank.com.br",
@@ -621,7 +1165,15 @@
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "caroline.coutinho@nubank.com.br",
@@ -630,7 +1182,15 @@
    "leaderEmail": "mariana.antunes@nubank.com.br",
    "leaderName": "Mariana Antunes",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "caroline.paixao@nubank.com.br",
@@ -639,7 +1199,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": true
+   "critical": true,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1
+   ]
   },
   {
    "email": "celso.dutra@nubank.com.br",
@@ -648,7 +1216,15 @@
    "leaderEmail": "camilla.marques@nubank.com.br",
    "leaderName": "Camilla Marques",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "cesar.cruz@nubank.com.br",
@@ -657,7 +1233,15 @@
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "daniela.madureira@nubank.com.br",
@@ -666,7 +1250,15 @@
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "daniele.cruz@nubank.com.br",
@@ -675,7 +1267,15 @@
    "leaderEmail": "adriana.falcao@nubank.com.br",
    "leaderName": "Adriana Falcao",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "fernanda.nascimento@nubank.com.br",
@@ -684,7 +1284,15 @@
    "leaderEmail": null,
    "leaderName": "-",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "gabriel.peixoto@nubank.com.br",
@@ -693,7 +1301,15 @@
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "gabrielle.macedo@nubank.com.br",
@@ -702,7 +1318,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "giulia.machado@nubank.com.br",
@@ -711,7 +1335,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "guilherme.zunareli@nubank.com.br",
@@ -720,7 +1352,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "heloisa.costa@nubank.com.br",
@@ -729,7 +1369,15 @@
    "leaderEmail": "priscila.marques@nubank.com.br",
    "leaderName": "Priscila Marques",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "ingrid.borher@nubank.com.br",
@@ -738,7 +1386,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "ingryd.caroline@nubank.com.br",
@@ -747,7 +1403,15 @@
    "leaderEmail": "mariana.antunes@nubank.com.br",
    "leaderName": "Mariana Antunes",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "juarez.lino@nubank.com.br",
@@ -756,7 +1420,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "julia.alanis@nubank.com.br",
@@ -765,7 +1437,15 @@
    "leaderEmail": "weslley.miranda@nubank.com.br",
    "leaderName": "Weslley Miranda",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "juliana.morais@nubank.com.br",
@@ -774,7 +1454,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "jusileia.matos@nubank.com.br",
@@ -783,7 +1471,15 @@
    "leaderEmail": "gabriela.eira@nubank.com.br",
    "leaderName": "Gabriela Eira",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "karol.paz@nubank.com.br",
@@ -792,7 +1488,15 @@
    "leaderEmail": "vinicius.bigon@nubank.com.br",
    "leaderName": "Vinicius Bigon",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "klebison.almeida@nubank.com.br",
@@ -801,7 +1505,15 @@
    "leaderEmail": "lazara.paulino@nubank.com.br",
    "leaderName": "Lazara Paulino",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "larissa.domingos@nubank.com.br",
@@ -810,7 +1522,15 @@
    "leaderEmail": "julia.guenka@nubank.com.br",
    "leaderName": "Julia Guenka",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "leticia.santiago@nubank.com.br",
@@ -819,7 +1539,15 @@
    "leaderEmail": "paulo.silveira@nubank.com.br",
    "leaderName": "Paulo Silveira",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "livia.silva@nubank.com.br",
@@ -828,7 +1556,15 @@
    "leaderEmail": "camilla.marques@nubank.com.br",
    "leaderName": "Camilla Marques",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "lucas.zerbinatti@nubank.com.br",
@@ -837,7 +1573,15 @@
    "leaderEmail": "gabriela.eira@nubank.com.br",
    "leaderName": "Gabriela Eira",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "luciano.marcelino@nubank.com.br",
@@ -846,7 +1590,15 @@
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "luiz.miguel@nubank.com.br",
@@ -855,7 +1607,15 @@
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "marcia.polli@nubank.com.br",
@@ -864,7 +1624,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "marina.alves@nubank.com.br",
@@ -873,7 +1641,15 @@
    "leaderEmail": null,
    "leaderName": "-",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
   },
   {
    "email": "priscila.teles@nubank.com.br",
@@ -882,7 +1658,15 @@
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "pyetra.simoes@nubank.com.br",
@@ -891,7 +1675,15 @@
    "leaderEmail": "enzo.berardo@nubank.com.br",
    "leaderName": "Enzo Berardo",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "rafael.domingos2@nubank.com.br",
@@ -900,7 +1692,15 @@
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "raquel.cerqueira@nubank.com.br",
@@ -909,7 +1709,15 @@
    "leaderEmail": "gabriela.eira@nubank.com.br",
    "leaderName": "Gabriela Eira",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "stefany.ferraz@nubank.com.br",
@@ -918,7 +1726,15 @@
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "stephanie.rocha@nubank.com.br",
@@ -927,7 +1743,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "tamirys.ortiz@nubank.com.br",
@@ -936,7 +1760,15 @@
    "leaderEmail": "helen.silva@nubank.com.br",
    "leaderName": "Helen Silva",
    "count": 1,
-   "critical": true
+   "critical": true,
+   "q": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1
+   ]
   },
   {
    "email": "tathiana.leao@nubank.com.br",
@@ -945,7 +1777,15 @@
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "thayna.santos@nubank.com.br",
@@ -954,7 +1794,15 @@
    "leaderEmail": "bruna.matos@nubank.com.br",
    "leaderName": "Bruna Matos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "thiago.guedes@nubank.com.br",
@@ -963,7 +1811,15 @@
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "vinicius.bento@nubank.com.br",
@@ -972,7 +1828,15 @@
    "leaderEmail": "adriana.falcao@nubank.com.br",
    "leaderName": "Adriana Falcao",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "vitoria.barboza@nubank.com.br",
@@ -981,7 +1845,15 @@
    "leaderEmail": "fabiana.fink@nubank.com.br",
    "leaderName": "Fabiana Fink",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
   },
   {
    "email": "wagner.santos@nubank.com.br",
@@ -990,7 +1862,15 @@
    "leaderEmail": null,
    "leaderName": "-",
    "count": 1,
-   "critical": false
+   "critical": false,
+   "q": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
   }
  ],
  "teams": [
