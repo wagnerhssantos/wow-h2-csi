@@ -206,6 +206,7 @@
   .callout { margin-top: 14px; background: var(--purple-light); border-radius: 10px; padding: 12px 14px; font-size: 12.5px; color: var(--purple-dark); line-height: 1.5; }
   .channel-summary { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
   .critical-note { background: var(--red-bg); color: #7a1f1f; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 14px; }
+  .warn-flag { font-size: 11px; cursor: help; vertical-align: middle; }
 
   /* ---- termometro por time / xmart (tooltip no hover) ---- */
   .thermo-hint { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -515,7 +516,7 @@ function thermoHtml(title, sub, q, opts) {
     : "";
 
   const flag = opts.critical
-    ? `<div class="tt-flag">⚠️ fora do ranking do período: teve ${de} atendimento${de === 1 ? "" : "s"} delicado${de === 1 ? "" : "s"} (contestação aberta).</div>`
+    ? `<div class="tt-flag">⚠️ teve ${de} atendimento${de === 1 ? "" : "s"} delicado${de === 1 ? "" : "s"} (contestação aberta) no período.</div>`
     : "";
 
   const score = classified
@@ -684,13 +685,12 @@ function xmartThermoSub(it) {
 }
 
 function renderXmartsPanel(period) {
-  const fullList = period.xmarts;
-  const excluded = fullList.filter(x => x.critical).length;
-  const xmartList = fullList.filter(x => !x.critical);
+  const xmartList = period.xmarts;
+  const flagged = xmartList.filter(x => x.critical).length;
   const maxXmart = xmartList.length ? xmartList[0].count : 0;
   const xmartRow = (it, idx) => `
     <td class="rank-num">${idx + 1}</td>
-    <td>${it.name}</td>
+    <td>${it.name}${it.critical ? ' <span class="warn-flag" title="Teve atendimento delicado (contestação aberta) no período">⚠️</span>' : ""}</td>
     <td>${it.team}</td>
     <td>${it.leaderName || "-"}</td>
     <td class="bar-cell">${barCellHtml(it.count, maxXmart)}</td>
@@ -698,9 +698,11 @@ function renderXmartsPanel(period) {
   `;
 
   const noteEl = document.getElementById("criticalNote");
-  if (excluded > 0) {
+  if (flagged > 0) {
     noteEl.style.display = "block";
-    noteEl.textContent = `${excluded} agente${excluded === 1 ? "" : "s"} não aparece${excluded === 1 ? "" : "m"} neste ranking por ter tido pelo menos 1 atendimento delicado (contestação aberta) no período.`;
+    noteEl.textContent = flagged === 1
+      ? "⚠️ marca 1 agente que teve pelo menos 1 atendimento delicado (contestação aberta) no período. Ele segue no ranking, na posição real — passe o mouse no nome para ver a régua de qualidade."
+      : `⚠️ marca ${flagged} agentes que tiveram pelo menos 1 atendimento delicado (contestação aberta) no período. Todos seguem no ranking, na posição real — passe o mouse no nome para ver a régua de qualidade.`;
   } else {
     noteEl.style.display = "none";
   }
