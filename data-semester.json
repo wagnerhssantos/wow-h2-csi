@@ -8,7 +8,7 @@
    "team": "Joey Time",
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
-   "count": 34,
+   "count": 35,
    "critical": false
   },
   {
@@ -39,6 +39,15 @@
    "critical": true
   },
   {
+   "email": "caroline.paixao@nubank.com.br",
+   "name": "Caroline Paixao",
+   "team": "Nustark",
+   "leaderEmail": "simone.rodrigues@nubank.com.br",
+   "leaderName": "Simone Rodrigues",
+   "count": 21,
+   "critical": true
+  },
+  {
    "email": "raquel.silva@nubank.com.br",
    "name": "Raquel Silva",
    "team": "O poderoso timão",
@@ -54,15 +63,6 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 21,
-   "critical": true
-  },
-  {
-   "email": "caroline.paixao@nubank.com.br",
-   "name": "Caroline Paixao",
-   "team": "Nustark",
-   "leaderEmail": "simone.rodrigues@nubank.com.br",
-   "leaderName": "Simone Rodrigues",
-   "count": 20,
    "critical": true
   },
   {
@@ -219,11 +219,38 @@
    "critical": false
   },
   {
+   "email": "pyetra.simoes@nubank.com.br",
+   "name": "Pyetra Simoes",
+   "team": "Scooby-Nu",
+   "leaderEmail": "enzo.berardo@nubank.com.br",
+   "leaderName": "Enzo Berardo",
+   "count": 8,
+   "critical": true
+  },
+  {
+   "email": "thays.alencar@nubank.com.br",
+   "name": "Thays Alencar",
+   "team": "O poderoso timão",
+   "leaderEmail": "luciana.gomes@nubank.com.br",
+   "leaderName": "Luciana Gomes",
+   "count": 8,
+   "critical": false
+  },
+  {
    "email": "kelly.caxico@nubank.com.br",
    "name": "Kelly Caxico",
    "team": "O poderoso timão",
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
+   "count": 7,
+   "critical": false
+  },
+  {
+   "email": "leonardo.soares@nubank.com.br",
+   "name": "Leonardo Soares",
+   "team": "Joey Time",
+   "leaderEmail": "aline.almeida@nubank.com.br",
+   "leaderName": "Aline Almeida",
    "count": 7,
    "critical": false
   },
@@ -237,29 +264,11 @@
    "critical": false
   },
   {
-   "email": "pyetra.simoes@nubank.com.br",
-   "name": "Pyetra Simoes",
-   "team": "Scooby-Nu",
-   "leaderEmail": "enzo.berardo@nubank.com.br",
-   "leaderName": "Enzo Berardo",
-   "count": 7,
-   "critical": true
-  },
-  {
    "email": "stephanie.santos@nubank.com.br",
    "name": "Stephanie Santos",
    "team": "This Is Nu",
    "leaderEmail": "mayara.eiras@nubank.com.br",
    "leaderName": "Mayara Eiras",
-   "count": 7,
-   "critical": false
-  },
-  {
-   "email": "thays.alencar@nubank.com.br",
-   "name": "Thays Alencar",
-   "team": "O poderoso timão",
-   "leaderEmail": "luciana.gomes@nubank.com.br",
-   "leaderName": "Luciana Gomes",
    "count": 7,
    "critical": false
   },
@@ -287,15 +296,6 @@
    "team": "Nuthings",
    "leaderEmail": "camilla.marques@nubank.com.br",
    "leaderName": "Camilla Marques",
-   "count": 6,
-   "critical": false
-  },
-  {
-   "email": "leonardo.soares@nubank.com.br",
-   "name": "Leonardo Soares",
-   "team": "Joey Time",
-   "leaderEmail": "aline.almeida@nubank.com.br",
-   "leaderName": "Aline Almeida",
    "count": 6,
    "critical": false
   },
@@ -381,6 +381,15 @@
    "critical": false
   },
   {
+   "email": "fernanda.lacerda@nubank.com.br",
+   "name": "Fernanda Lacerda",
+   "team": "Super NUBros",
+   "leaderEmail": "fabiana.fink@nubank.com.br",
+   "leaderName": "Fabiana Fink",
+   "count": 5,
+   "critical": false
+  },
+  {
    "email": "isabelle.rossi@nubank.com.br",
    "name": "Isabelle Rossi",
    "team": "Nu, Nai e as crianças",
@@ -462,11 +471,11 @@
    "critical": false
   },
   {
-   "email": "fernanda.lacerda@nubank.com.br",
-   "name": "Fernanda Lacerda",
-   "team": "Super NUBros",
-   "leaderEmail": "fabiana.fink@nubank.com.br",
-   "leaderName": "Fabiana Fink",
+   "email": "gabriella.targino@nubank.com.br",
+   "name": "Gabriella Targino",
+   "team": "Nu of Thrones",
+   "leaderEmail": "dannusa.borges@nubank.com.br",
+   "leaderName": "Dannusa Borges",
    "count": 4,
    "critical": false
   },
@@ -531,6 +540,15 @@
    "leaderEmail": "cristina.carvalho@nubank.com.br",
    "leaderName": "Cristina Carvalho",
    "count": 4,
+   "critical": false
+  },
+  {
+   "email": "adriellen.sales@nubank.com.br",
+   "name": "Adriellen Sales",
+   "team": "Super NUBros",
+   "leaderEmail": "fabiana.fink@nubank.com.br",
+   "leaderName": "Fabiana Fink",
+   "count": 3,
    "critical": false
   },
   {
@@ -606,6 +624,15 @@
    "critical": false
   },
   {
+   "email": "daiane.macedo@nubank.com.br",
+   "name": "Daiane Macedo",
+   "team": "Nurangers",
+   "leaderEmail": "julia.guenka@nubank.com.br",
+   "leaderName": "Julia Guenka",
+   "count": 3,
+   "critical": false
+  },
+  {
    "email": "dayse.santos@nubank.com.br",
    "name": "Dayse Santos",
    "team": "TIME VINI",
@@ -615,11 +642,11 @@
    "critical": false
   },
   {
-   "email": "gabriella.targino@nubank.com.br",
-   "name": "Gabriella Targino",
-   "team": "Nu of Thrones",
-   "leaderEmail": "dannusa.borges@nubank.com.br",
-   "leaderName": "Dannusa Borges",
+   "email": "gilson.neves@nubank.com.br",
+   "name": "Gilson Neves",
+   "team": "Snuppy Team",
+   "leaderEmail": "adriana.falcao@nubank.com.br",
+   "leaderName": "Adriana Falcao",
    "count": 3,
    "critical": false
   },
@@ -732,6 +759,15 @@
    "critical": true
   },
   {
+   "email": "stefany.queiroz@nubank.com.br",
+   "name": "Stefany Queiroz",
+   "team": "NuTopia",
+   "leaderEmail": "carolina.camara@nubank.com.br",
+   "leaderName": "Carolina Camara",
+   "count": 3,
+   "critical": false
+  },
+  {
    "email": "tathiana.leao@nubank.com.br",
    "name": "Tathiana Leao",
    "team": "Nustark",
@@ -741,12 +777,12 @@
    "critical": true
   },
   {
-   "email": "adriellen.sales@nubank.com.br",
-   "name": "Adriellen Sales",
-   "team": "Super NUBros",
-   "leaderEmail": "fabiana.fink@nubank.com.br",
-   "leaderName": "Fabiana Fink",
-   "count": 2,
+   "email": "thalita.gomes@nubank.com.br",
+   "name": "Thalita Gomes",
+   "team": "Nuvangers",
+   "leaderEmail": "mayara.iacometti@nubank.com.br",
+   "leaderName": "Mayara Iacometti",
+   "count": 3,
    "critical": false
   },
   {
@@ -858,15 +894,6 @@
    "critical": false
   },
   {
-   "email": "daiane.macedo@nubank.com.br",
-   "name": "Daiane Macedo",
-   "team": "Nurangers",
-   "leaderEmail": "julia.guenka@nubank.com.br",
-   "leaderName": "Julia Guenka",
-   "count": 2,
-   "critical": false
-  },
-  {
    "email": "daniela.madureira@nubank.com.br",
    "name": "Daniela Madureira",
    "team": "Joey Time",
@@ -912,11 +939,11 @@
    "critical": false
   },
   {
-   "email": "gilson.neves@nubank.com.br",
-   "name": "Gilson Neves",
-   "team": "Snuppy Team",
-   "leaderEmail": "adriana.falcao@nubank.com.br",
-   "leaderName": "Adriana Falcao",
+   "email": "helen.ferreira@nubank.com.br",
+   "name": "Helen Ferreira",
+   "team": "Nufriends",
+   "leaderEmail": "lazara.paulino@nubank.com.br",
+   "leaderName": "Lazara Paulino",
    "count": 2,
    "critical": false
   },
@@ -984,6 +1011,15 @@
    "critical": false
   },
   {
+   "email": "lucas.cassimiro@nubank.com.br",
+   "name": "Lucas Cassimiro",
+   "team": "Os Incríveis",
+   "leaderEmail": "wagner.santos@nubank.com.br",
+   "leaderName": "Wagner Santos",
+   "count": 2,
+   "critical": false
+  },
+  {
    "email": "marco.ferreira@nubank.com.br",
    "name": "Marco Ferreira",
    "team": "O poderoso timão",
@@ -1025,6 +1061,15 @@
    "team": "Nu Mission",
    "leaderEmail": "helen.silva@nubank.com.br",
    "leaderName": "Helen Silva",
+   "count": 2,
+   "critical": false
+  },
+  {
+   "email": "nicolas.dell@nubank.com.br",
+   "name": "Nicolas Dell",
+   "team": "NUP: Altas Aventuras",
+   "leaderEmail": "lucas.roberto@nubank.com.br",
+   "leaderName": "Lucas Roberto",
    "count": 2,
    "critical": false
   },
@@ -1083,6 +1128,15 @@
    "critical": false
   },
   {
+   "email": "talita.moura@nubank.com.br",
+   "name": "Talita Moura",
+   "team": "NuBBB",
+   "leaderEmail": "renata.masoni@nubank.com.br",
+   "leaderName": "Renata Masoni",
+   "count": 2,
+   "critical": false
+  },
+  {
    "email": "talita.patriarchi@nubank.com.br",
    "name": "Talita Patriarchi",
    "team": "Seleção Big CSI Brasil",
@@ -1099,15 +1153,6 @@
    "leaderName": "Helen Silva",
    "count": 2,
    "critical": true
-  },
-  {
-   "email": "thalita.gomes@nubank.com.br",
-   "name": "Thalita Gomes",
-   "team": "Nuvangers",
-   "leaderEmail": "mayara.iacometti@nubank.com.br",
-   "leaderName": "Mayara Iacometti",
-   "count": 2,
-   "critical": false
   },
   {
    "email": "thayna.santos@nubank.com.br",
@@ -1254,6 +1299,15 @@
    "critical": false
   },
   {
+   "email": "edmundo.vicente@nubank.com.br",
+   "name": "Edmundo Vicente",
+   "team": "Seleção Big CSI Brasil",
+   "leaderEmail": "raphael.mourao@nubank.com.br",
+   "leaderName": "Raphael Mourao",
+   "count": 1,
+   "critical": false
+  },
+  {
    "email": "eduarda.maia@nubank.com.br",
    "name": "Eduarda Maia",
    "team": "Clube da Abertura",
@@ -1362,15 +1416,6 @@
    "critical": false
   },
   {
-   "email": "helen.ferreira@nubank.com.br",
-   "name": "Helen Ferreira",
-   "team": "Nufriends",
-   "leaderEmail": "lazara.paulino@nubank.com.br",
-   "leaderName": "Lazara Paulino",
-   "count": 1,
-   "critical": false
-  },
-  {
    "email": "hyllari.pinheiro@nubank.com.br",
    "name": "Hyllari Pinheiro",
    "team": "Super NUBros",
@@ -1403,6 +1448,15 @@
    "team": "NUP: Altas Aventuras",
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
+   "count": 1,
+   "critical": false
+  },
+  {
+   "email": "julia.gomes@nubank.com.br",
+   "name": "Julia Gomes",
+   "team": "Nuvangers",
+   "leaderEmail": "mayara.iacometti@nubank.com.br",
+   "leaderName": "Mayara Iacometti",
    "count": 1,
    "critical": false
   },
@@ -1466,15 +1520,6 @@
    "team": "Nuthings",
    "leaderEmail": "camilla.marques@nubank.com.br",
    "leaderName": "Camilla Marques",
-   "count": 1,
-   "critical": false
-  },
-  {
-   "email": "lucas.cassimiro@nubank.com.br",
-   "name": "Lucas Cassimiro",
-   "team": "Os Incríveis",
-   "leaderEmail": "wagner.santos@nubank.com.br",
-   "leaderName": "Wagner Santos",
    "count": 1,
    "critical": false
   },
@@ -1560,15 +1605,6 @@
    "critical": false
   },
   {
-   "email": "nicolas.dell@nubank.com.br",
-   "name": "Nicolas Dell",
-   "team": "NUP: Altas Aventuras",
-   "leaderEmail": "lucas.roberto@nubank.com.br",
-   "leaderName": "Lucas Roberto",
-   "count": 1,
-   "critical": false
-  },
-  {
    "email": "nicoly.brandao@nubank.com.br",
    "name": "Nicoly Brandao",
    "team": "Super NUBros",
@@ -1632,29 +1668,11 @@
    "critical": false
   },
   {
-   "email": "stefany.queiroz@nubank.com.br",
-   "name": "Stefany Queiroz",
-   "team": "NuTopia",
-   "leaderEmail": "carolina.camara@nubank.com.br",
-   "leaderName": "Carolina Camara",
-   "count": 1,
-   "critical": false
-  },
-  {
    "email": "stephanie.rocha@nubank.com.br",
    "name": "Stephanie Rocha",
    "team": "Nustark",
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
-   "count": 1,
-   "critical": false
-  },
-  {
-   "email": "talita.moura@nubank.com.br",
-   "name": "Talita Moura",
-   "team": "NuBBB",
-   "leaderEmail": "renata.masoni@nubank.com.br",
-   "leaderName": "Renata Masoni",
    "count": 1,
    "critical": false
   },
@@ -1743,12 +1761,12 @@
  "teams": [
   {
    "name": "Joey Time",
-   "count": 71,
+   "count": 73,
    "xmarts": 10,
    "leaderEmail": "aline.almeida@nubank.com.br",
    "leaderName": "Aline Almeida",
    "channels": {
-    "phone": 70,
+    "phone": 72,
     "chat": 1
    }
   },
@@ -1765,34 +1783,34 @@
   },
   {
    "name": "O poderoso timão",
-   "count": 58,
+   "count": 59,
    "xmarts": 9,
    "leaderEmail": "luciana.gomes@nubank.com.br",
    "leaderName": "Luciana Gomes",
    "channels": {
-    "phone": 56,
+    "phone": 57,
     "chat": 2
    }
   },
   {
    "name": "NuBBB",
-   "count": 48,
+   "count": 49,
    "xmarts": 12,
    "leaderEmail": "renata.masoni@nubank.com.br",
    "leaderName": "Renata Masoni",
    "channels": {
-    "phone": 46,
+    "phone": 47,
     "chat": 2
    }
   },
   {
    "name": "Nustark",
-   "count": 48,
+   "count": 49,
    "xmarts": 9,
    "leaderEmail": "simone.rodrigues@nubank.com.br",
    "leaderName": "Simone Rodrigues",
    "channels": {
-    "phone": 43,
+    "phone": 44,
     "chat": 4,
     "backoffice": 1
    }
@@ -1810,23 +1828,23 @@
   },
   {
    "name": "NuTopia",
-   "count": 43,
+   "count": 45,
    "xmarts": 9,
    "leaderEmail": "carolina.camara@nubank.com.br",
    "leaderName": "Carolina Camara",
    "channels": {
-    "phone": 41,
+    "phone": 43,
     "chat": 2
    }
   },
   {
    "name": "Nurangers",
-   "count": 40,
+   "count": 41,
    "xmarts": 4,
    "leaderEmail": "julia.guenka@nubank.com.br",
    "leaderName": "Julia Guenka",
    "channels": {
-    "phone": 38,
+    "phone": 39,
     "chat": 2
    }
   },
@@ -1843,12 +1861,12 @@
   },
   {
    "name": "NUP: Altas Aventuras",
-   "count": 36,
+   "count": 37,
    "xmarts": 9,
    "leaderEmail": "lucas.roberto@nubank.com.br",
    "leaderName": "Lucas Roberto",
    "channels": {
-    "phone": 32,
+    "phone": 33,
     "chat": 4
    }
   },
@@ -1865,22 +1883,22 @@
   },
   {
    "name": "Nuvangers",
-   "count": 31,
-   "xmarts": 6,
+   "count": 33,
+   "xmarts": 7,
    "leaderEmail": "mayara.iacometti@nubank.com.br",
    "leaderName": "Mayara Iacometti",
    "channels": {
-    "phone": 31
+    "phone": 33
    }
   },
   {
    "name": "Os Incríveis",
-   "count": 28,
+   "count": 29,
    "xmarts": 10,
    "leaderEmail": "wagner.santos@nubank.com.br",
    "leaderName": "Wagner Santos",
    "channels": {
-    "phone": 24,
+    "phone": 25,
     "chat": 4
    }
   },
@@ -1896,12 +1914,12 @@
   },
   {
    "name": "Super NUBros",
-   "count": 22,
+   "count": 24,
    "xmarts": 9,
    "leaderEmail": "fabiana.fink@nubank.com.br",
    "leaderName": "Fabiana Fink",
    "channels": {
-    "phone": 21,
+    "phone": 23,
     "chat": 1
    }
   },
@@ -1918,12 +1936,12 @@
   },
   {
    "name": "Snuppy Team",
-   "count": 19,
+   "count": 20,
    "xmarts": 7,
    "leaderEmail": "adriana.falcao@nubank.com.br",
    "leaderName": "Adriana Falcao",
    "channels": {
-    "phone": 17,
+    "phone": 18,
     "chat": 2
    }
   },
@@ -1963,35 +1981,46 @@
   },
   {
    "name": "Scooby-Nu",
-   "count": 12,
+   "count": 13,
    "xmarts": 3,
    "leaderEmail": "enzo.berardo@nubank.com.br",
    "leaderName": "Enzo Berardo",
    "channels": {
-    "phone": 10,
+    "phone": 11,
     "chat": 2
    }
   },
   {
    "name": "Nu of Thrones",
-   "count": 9,
+   "count": 10,
    "xmarts": 4,
    "leaderEmail": "dannusa.borges@nubank.com.br",
    "leaderName": "Dannusa Borges",
+   "channels": {
+    "phone": 9,
+    "chat": 1
+   }
+  },
+  {
+   "name": "Nufriends",
+   "count": 9,
+   "xmarts": 5,
+   "leaderEmail": "lazara.paulino@nubank.com.br",
+   "leaderName": "Lazara Paulino",
    "channels": {
     "phone": 8,
     "chat": 1
    }
   },
   {
-   "name": "Nufriends",
+   "name": "Seleção Big CSI Brasil",
    "count": 8,
    "xmarts": 5,
-   "leaderEmail": "lazara.paulino@nubank.com.br",
-   "leaderName": "Lazara Paulino",
+   "leaderEmail": "raphael.mourao@nubank.com.br",
+   "leaderName": "Raphael Mourao",
    "channels": {
-    "phone": 7,
-    "chat": 1
+    "chat": 7,
+    "phone": 1
    }
   },
   {
@@ -2014,17 +2043,6 @@
     "phone": 5,
     "chat": 1,
     "outros": 1
-   }
-  },
-  {
-   "name": "Seleção Big CSI Brasil",
-   "count": 7,
-   "xmarts": 4,
-   "leaderEmail": "raphael.mourao@nubank.com.br",
-   "leaderName": "Raphael Mourao",
-   "channels": {
-    "chat": 6,
-    "phone": 1
    }
   },
   {
@@ -2055,7 +2073,7 @@
    "email": "aline.almeida@nubank.com.br",
    "name": "Aline Almeida",
    "team": "Joey Time",
-   "count": 71
+   "count": 73
   },
   {
    "email": "helen.silva@nubank.com.br",
@@ -2067,19 +2085,19 @@
    "email": "luciana.gomes@nubank.com.br",
    "name": "Luciana Gomes",
    "team": "O poderoso timão",
-   "count": 58
+   "count": 59
   },
   {
    "email": "renata.masoni@nubank.com.br",
    "name": "Renata Masoni",
    "team": "NuBBB",
-   "count": 48
+   "count": 49
   },
   {
    "email": "simone.rodrigues@nubank.com.br",
    "name": "Simone Rodrigues",
    "team": "Nustark",
-   "count": 48
+   "count": 49
   },
   {
    "email": "cristina.carvalho@nubank.com.br",
@@ -2091,13 +2109,13 @@
    "email": "carolina.camara@nubank.com.br",
    "name": "Carolina Camara",
    "team": "NuTopia",
-   "count": 43
+   "count": 45
   },
   {
    "email": "julia.guenka@nubank.com.br",
    "name": "Julia Guenka",
    "team": "Nurangers",
-   "count": 40
+   "count": 41
   },
   {
    "email": "naiara.franca@nubank.com.br",
@@ -2109,7 +2127,7 @@
    "email": "lucas.roberto@nubank.com.br",
    "name": "Lucas Roberto",
    "team": "NUP: Altas Aventuras",
-   "count": 36
+   "count": 37
   },
   {
    "email": "weslley.miranda@nubank.com.br",
@@ -2121,13 +2139,19 @@
    "email": "mayara.iacometti@nubank.com.br",
    "name": "Mayara Iacometti",
    "team": "Nuvangers",
-   "count": 31
+   "count": 33
   },
   {
    "email": "wagner.santos@nubank.com.br",
    "name": "Wagner Santos",
    "team": "Os Incríveis",
-   "count": 28
+   "count": 29
+  },
+  {
+   "email": "fabiana.fink@nubank.com.br",
+   "name": "Fabiana Fink",
+   "team": "Super NUBros",
+   "count": 24
   },
   {
    "email": "paulo.silveira@nubank.com.br",
@@ -2136,22 +2160,16 @@
    "count": 24
   },
   {
-   "email": "fabiana.fink@nubank.com.br",
-   "name": "Fabiana Fink",
-   "team": "Super NUBros",
-   "count": 22
+   "email": "adriana.falcao@nubank.com.br",
+   "name": "Adriana Falcao",
+   "team": "Snuppy Team",
+   "count": 20
   },
   {
    "email": "bruna.matos@nubank.com.br",
    "name": "Bruna Matos",
    "team": "Casa dos Artistas",
    "count": 20
-  },
-  {
-   "email": "adriana.falcao@nubank.com.br",
-   "name": "Adriana Falcao",
-   "team": "Snuppy Team",
-   "count": 19
   },
   {
    "email": "gabriela.eira@nubank.com.br",
@@ -2175,18 +2193,24 @@
    "email": "enzo.berardo@nubank.com.br",
    "name": "Enzo Berardo",
    "team": "Scooby-Nu",
-   "count": 12
+   "count": 13
   },
   {
    "email": "dannusa.borges@nubank.com.br",
    "name": "Dannusa Borges",
    "team": "Nu of Thrones",
-   "count": 9
+   "count": 10
   },
   {
    "email": "lazara.paulino@nubank.com.br",
    "name": "Lazara Paulino",
    "team": "Nufriends",
+   "count": 9
+  },
+  {
+   "email": "raphael.mourao@nubank.com.br",
+   "name": "Raphael Mourao",
+   "team": "Seleção Big CSI Brasil",
    "count": 8
   },
   {
@@ -2202,12 +2226,6 @@
    "count": 7
   },
   {
-   "email": "raphael.mourao@nubank.com.br",
-   "name": "Raphael Mourao",
-   "team": "Seleção Big CSI Brasil",
-   "count": 7
-  },
-  {
    "email": "priscila.marques@nubank.com.br",
    "name": "Priscila Marques",
    "team": "YabadabaNu",
@@ -2220,26 +2238,26 @@
    "count": 5
   }
  ],
- "total_wows": 783,
- "total_xmarts": 193,
+ "total_wows": 802,
+ "total_xmarts": 195,
  "total_teams": 28,
  "quality": {
-  "total": 783,
-  "green": 431,
-  "yellow": 212,
-  "red": 140,
-  "pending": 0,
-  "green_pct": 55.0,
-  "yellow_pct": 27.1,
-  "red_pct": 17.9,
+  "total": 802,
+  "green": 440,
+  "yellow": 213,
+  "red": 141,
+  "pending": 8,
+  "green_pct": 55.4,
+  "yellow_pct": 26.8,
+  "red_pct": 17.8,
   "red_breakdown": {
-   "atencao": 123,
+   "atencao": 124,
    "atendimento_delicado": 17
   }
  },
  "channels_overall": {
-  "phone": 716,
-  "chat": 62,
+  "phone": 734,
+  "chat": 63,
   "backoffice": 2,
   "outros": 2,
   "zendesk": 1
